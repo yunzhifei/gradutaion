@@ -25,6 +25,9 @@ public class HomeController {
         System.out.println(request.getRequestURL());
         System.out.println(userId);
         model.addAttribute("hello", 6);
+
+
+
         return "hello";
     }
 
