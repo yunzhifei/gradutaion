@@ -7,13 +7,14 @@ import lombok.NoArgsConstructor;
 /**
  * Created by 58 on 2017/1/17.
  * author yunzhifei
+ * author yun zhi fei
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
     private int id;
-    private Long userId;
     private String userName;
-    private String account;
+    private String passWord;
+    private String userType;
 }

@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 
 /**
  * Created by 58 on 2017/1/17.
- * author yunzhifei
+ * author yun zhi fei
  */
 @Service
 public class UserService {
     @Autowired
-    private IUserDao userDao;
+    IUserDao userDao;
 
     public User findUserById(int userId) {
         return userDao.findUserById(userId);
