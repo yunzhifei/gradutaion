@@ -16,7 +16,7 @@ public interface IUserDao {
     @Select("select * from user where id=#{id}")
     User findUserById(@Param("id") int id);
 
-    @Insert({"insert into loginticket(userId,status,expired,ticket) values(#{userId},#{status},#{expired},#{ticket})"})
+    @Insert({"insert into loginticket(id,userId,status,expired,ticket) values(null,#{userId},#{status},#{expired},#{ticket})"})
     int login(@Param("userId")String userId,@Param("status")int status,@Param("ticket")String ticket,@Param("expired")Boolean expired);
 
 }
