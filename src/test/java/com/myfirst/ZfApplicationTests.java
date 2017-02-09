@@ -17,7 +17,7 @@ public class ZfApplicationTests {
 
     @Test
     public void contextLoads() {
-       userDao.login("14",2,"asdfasdf",false);
+       userDao.login("14",2,"asdfasdf ",false);
     }
 
 }
