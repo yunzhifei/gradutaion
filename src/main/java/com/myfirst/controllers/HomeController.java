@@ -24,7 +24,7 @@ public class HomeController {
     public String hello(Model model, HttpServletRequest request, @PathVariable("userId") String userId) {
         System.out.println(request.getRequestURL());
         System.out.println(userId);
-        model.addAttribute("hello", 6);
+        model.addAttribute("hello ", 6);
         return "hello";
     }
 
