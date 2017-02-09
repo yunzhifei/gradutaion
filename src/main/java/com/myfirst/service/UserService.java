@@ -17,4 +17,8 @@ public class UserService {
     public User findUserById(int userId) {
         return userDao.findUserById(userId);
     }
+
+    public void login(String userId, int status, String ticket, Boolean expired) {
+        userDao.login(userId, status, ticket, expired);
+    }
 }
