@@ -18,6 +18,14 @@ public class User {
     private String userName;
     private String password;
     private String salt;
+    private byte sex;
+    private String name;
+    private String address;
     private short userType;
+    private int age;
+    private String phone;
+    private String email;
+    private String description;
     private short isDelete;
+
 }

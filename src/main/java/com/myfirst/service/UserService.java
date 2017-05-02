@@ -18,7 +18,7 @@ public class UserService {
         return userDao.findUserById(userId);
     }
 
-    public void login(String userId, int status, String ticket, Boolean expired) {
-        userDao.login(userId, status, ticket, expired);
+    public int addUser(User user) {
+        return userDao.addUser(user);
     }
 }

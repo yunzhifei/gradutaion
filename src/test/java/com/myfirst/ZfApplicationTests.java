@@ -12,12 +12,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @SpringApplicationConfiguration(classes = ZfApplication.class)
 @WebAppConfiguration
 public class ZfApplicationTests {
-    @Autowired
-    IUserDao userDao;
 
-    @Test
-    public void contextLoads() {
-       userDao.login("156",2,"asdfasdf ",false);
-    }
 
 }

@@ -6,9 +6,10 @@ import com.sun.deploy.net.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * Created by 58 on 2017/2/8.
@@ -20,10 +21,8 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/user/{userId}")
-    public String showUserInfo(@PathVariable("userId") int userId, Model model) {
-        User user = userService.findUserById(userId);
-        model.addAttribute("user", user);
+    @RequestMapping(value = "/user", method = {RequestMethod.GET})
+    public String showUserInfo() {
         return "user";
     }
 
@@ -34,5 +33,12 @@ public class UserController {
                               @RequestParam(value = "remember", defaultValue = "0") int remember) {
 
         return "";
+    }
+
+    @RequestMapping(value = "/user", method = {RequestMethod.POST})
+    public String regUser(@Valid User user, BindingResult result,Model model) {
+        System.out.println("adfsdfasd");
+        userService.findUserById(1);
+        return "user";
     }
 }

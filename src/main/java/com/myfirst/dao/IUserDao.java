@@ -10,11 +10,14 @@ import org.apache.ibatis.annotations.*;
  */
 @Mapper
 public interface IUserDao {
-    @Select("select * from user where id=#{id}")
+    String TABLE_NAME = "user";
+    @Select("select * from "+TABLE_NAME+" where id=#{id}")
     User findUserById(@Param("id") int id);
 
-    @Insert({"insert into loginticket(userId,status,expired,ticket) values(#{userId},#{status},#{expired},#{ticket})"})
-    @Options(useGeneratedKeys = true, keyProperty = "id")
-    int login(@Param("userId") String userId, @Param("status") int status, @Param("ticket") String ticket, @Param("expired") Boolean expired);
+   @Insert("insert into "+ TABLE_NAME + "values(" +"null, " + "#{user.userid}, "+"#{user.userName}, "+"#{user.password}, "
+   +"#{user.salt}, " +"#{user.Type}, 0" )
+    int addUser(@Param("user") User user);
+
+
 
 }
