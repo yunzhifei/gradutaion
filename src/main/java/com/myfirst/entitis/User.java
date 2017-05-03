@@ -1,17 +1,13 @@
 package com.myfirst.entitis;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by 58 on 2017/1/17.
  * author yunzhifei
  * author yun zhi fei
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Component
 public class User {
     private int id;
     private long userId;
@@ -20,11 +16,125 @@ public class User {
     private String salt;
     private byte sex;
     private String name;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public void setSex(byte sex) {
+        this.sex = sex;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setUserType(short userType) {
+        this.userType = userType;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setIsDelete(short isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public int getId() {
+
+        return id;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public byte getSex() {
+        return sex;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public short getUserType() {
+        return userType;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public short getIsDelete() {
+        return isDelete;
+    }
+
     private String address;
     private short userType;
     private int age;
     private String phone;
-    private String email;
+    private String emailAddress;
     private String description;
     private short isDelete;
 
