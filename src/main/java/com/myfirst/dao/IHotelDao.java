@@ -1,10 +1,7 @@
 package com.myfirst.dao;
 
 import com.myfirst.entitis.Hotel;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -26,4 +23,7 @@ public interface IHotelDao {
 
     @Select("select * from " + TABLE_NAME + " where id=#{id}")
     Hotel findHotelById(@Param("id") int id);
+
+    @Update("update " + TABLE_NAME + "isDelete=1 where hotelId=#{hotelId}")
+    int updateHotel(@Param("hotelId") int hotelId);
 }

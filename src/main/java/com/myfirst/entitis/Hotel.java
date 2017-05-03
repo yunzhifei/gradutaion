@@ -4,11 +4,12 @@ import org.springframework.stereotype.Component;
 
 /**
  * Created by yunzh on 2017/5/3.
+ * yun zhi fei
  */
 @Component
 public class Hotel {
     int id;
-    int hotleId;
+    int hotelId;
     String name;
     String address;
     int price;
@@ -20,9 +21,6 @@ public class Hotel {
         this.id = id;
     }
 
-    public void setHotleId(int hotleId) {
-        this.hotleId = hotleId;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -53,8 +51,13 @@ public class Hotel {
         return id;
     }
 
-    public int getHotleId() {
-        return hotleId;
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
+    }
+
+    public int getHotelId() {
+
+        return hotelId;
     }
 
     public String getName() {

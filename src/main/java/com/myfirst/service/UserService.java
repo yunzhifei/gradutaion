@@ -1,6 +1,8 @@
 package com.myfirst.service;
 
 import com.myfirst.dao.IUserDao;
+import com.myfirst.dao.IticketDao;
+import com.myfirst.entitis.LoginTicket;
 import com.myfirst.entitis.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import java.util.Map;
 public class UserService {
     @Autowired
     IUserDao iUserDao;
+    @Autowired
+    IticketDao iticketDao;
 
     public User findUserById(int userId) {
         return iUserDao.findUserById(userId);
@@ -36,7 +40,16 @@ public class UserService {
         if (!user.getPassword().equals(password)) {
             responeMap.put("error", "用户名和密码不匹配！");
         } else {
-
+            LoginTicket loginTicket;
+            loginTicket = new LoginTicket();
+            loginTicket.setExpired((short) 0);
+            loginTicket.setUserId(user.getUserId());
+            loginTicket.setStatus(0);
+            // TODO: 2017/5/3 ticket产生算法
+            String ticket = "";
+            loginTicket.setTicket(ticket);
+            iticketDao.addTicket(loginTicket);
+            responeMap.put("ticket", loginTicket.getTicket());
         }
         return responeMap;
     }

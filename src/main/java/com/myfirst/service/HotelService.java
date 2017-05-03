@@ -26,4 +26,8 @@ public class HotelService {
     public int addHotel(Hotel hotel) {
         return hotelDao.addHotel(hotel);
     }
+
+    public int deleteHotel(int hotelId) {
+        return hotelDao.updateHotel(hotelId);
+    }
 }
