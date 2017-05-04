@@ -1,8 +1,6 @@
 package com.myfirst.dao;
 
 import com.myfirst.entitis.ViewSpot;
-import javafx.scene.control.Tab;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

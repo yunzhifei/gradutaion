@@ -13,7 +13,7 @@ public class GuideInfo {
     private String serverCity;
     private String cardId;
     private String workYear;
-    private String pirceOfDay;
+    private String priceOfDay;
     private String description;
     private byte isDelete;
     private int guideId;
@@ -38,9 +38,6 @@ public class GuideInfo {
         this.workYear = workYear;
     }
 
-    public void setPirceOfDay(String pirceOfDay) {
-        this.pirceOfDay = pirceOfDay;
-    }
 
     public void setDescription(String description) {
         this.description = description;
@@ -79,8 +76,13 @@ public class GuideInfo {
         return workYear;
     }
 
-    public String getPirceOfDay() {
-        return pirceOfDay;
+    public void setPriceOfDay(String priceOfDay) {
+        this.priceOfDay = priceOfDay;
+    }
+
+    public String getPriceOfDay() {
+
+        return priceOfDay;
     }
 
     public String getDescription() {

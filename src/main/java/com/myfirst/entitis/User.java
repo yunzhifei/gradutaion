@@ -16,6 +16,13 @@ public class User {
     private String salt;
     private byte sex;
     private String name;
+    private String address;
+    private short userType;
+    private int age;
+    private String phone;
+    private String emailAddress;
+    private String description;
+    private short isDelete;
 
     public void setId(int id) {
         this.id = id;
@@ -130,12 +137,5 @@ public class User {
         return isDelete;
     }
 
-    private String address;
-    private short userType;
-    private int age;
-    private String phone;
-    private String emailAddress;
-    private String description;
-    private short isDelete;
 
 }

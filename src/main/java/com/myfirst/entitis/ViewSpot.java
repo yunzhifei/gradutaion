@@ -1,6 +1,5 @@
 package com.myfirst.entitis;
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 /**
