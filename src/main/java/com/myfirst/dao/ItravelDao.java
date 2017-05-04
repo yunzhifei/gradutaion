@@ -3,7 +3,6 @@ package com.myfirst.dao;
 import com.myfirst.entitis.Travel;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * Created by Administrator on 2017/5/4.

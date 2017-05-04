@@ -14,6 +14,6 @@ public interface IviewSpotDao {
     String TABLE_NAME = "viewspot";
     String INSERT_FILELD = "id,viewName,address,phone,website,pictureUrl,description,isDelete";
 
-    @Select("select * from " + TABLE_NAME)
+    @Select({"select * from " + TABLE_NAME})
     List<ViewSpot> findAllView();
 }

@@ -1,10 +1,7 @@
 package com.myfirst.dao;
 
 import com.myfirst.entitis.GuideInfo;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -25,5 +22,9 @@ public interface IGuideInfoDao {
     @Select({"select * form " + TABLE_NAME})
     List<GuideInfo> selectAllGuideInfo();
 
+    @Select({"select * from " + TABLE_NAME + "where travelid=#{travelid}"})
+    GuideInfo selectGuideInfoById(@Param("travelid") int travelid);
 
+    @Update({"update " + TABLE_NAME + " set isDelete=1" + "where travelid=#{travelid}"})
+    int deleteGuideInfoById(@Param("travelid") int travelid);
 }

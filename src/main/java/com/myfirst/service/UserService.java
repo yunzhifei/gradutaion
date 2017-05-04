@@ -1,7 +1,7 @@
 package com.myfirst.service;
 
+import com.myfirst.dao.ILoginTicketDao;
 import com.myfirst.dao.IUserDao;
-import com.myfirst.dao.IticketDao;
 import com.myfirst.entitis.LoginTicket;
 import com.myfirst.entitis.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class UserService {
     @Autowired
     IUserDao iUserDao;
     @Autowired
-    IticketDao iticketDao;
+    ILoginTicketDao iticketDao;
 
     public User findUserById(int userId) {
         return iUserDao.findUserById(userId);
@@ -48,7 +48,7 @@ public class UserService {
             // TODO: 2017/5/3 ticket产生算法
             String ticket = "";
             loginTicket.setTicket(ticket);
-            iticketDao.addTicket(loginTicket);
+            iticketDao.addLoginTicket(loginTicket);
             responeMap.put("ticket", loginTicket.getTicket());
         }
         return responeMap;
