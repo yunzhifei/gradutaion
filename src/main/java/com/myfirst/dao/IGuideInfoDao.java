@@ -17,14 +17,13 @@ public interface IGuideInfoDao {
     String INSERT_FIELD = "name,sex,serverCity,cardId,workYear,priceOfDay,description,isDelete,guideId";
     String SELECT_FIELD = "id," + INSERT_FIELD;
 
-    @Insert("insert into " + TABLE_NAME + " ( " + INSERT_FIELD + " )  values (" +
+    @Insert({"insert into " + TABLE_NAME + " ( " + INSERT_FIELD + " )  values (" +
             "#{name}, " + "#{sex}, " + "#{cardId}, " + "#{workYear}, " + "#{priceOfDay}, "
-            + "#{description}, " + "#{isDelete}, " + "#{guideid}")
-    int addGuideInfo(@Param("guideInfo") GuideInfo guideInfo);
+            + "#{description}, " + "#{isDelete}, " + "#{guideid}"})
+    int addGuideInfo(GuideInfo guideInfo);
 
-    @Select("select * form " + TABLE_NAME)
+    @Select({"select * form " + TABLE_NAME})
     List<GuideInfo> selectAllGuideInfo();
-
 
 
 }

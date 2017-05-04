@@ -11,19 +11,19 @@ import java.util.List;
 @Mapper
 public interface IHotelDao {
     String TABLE_NAME = "hotel";
-    String INSERT_FILED = "id,hotelId,name,address,price,pictureUrl,Description,isDelete";
+    String INSERT_FILED = "hotelId,name,address,price,pictureUrl,Description,isDelete";
 
     @Select("select * from " + TABLE_NAME)
     List<Hotel> findAllHotel();
 
-    @Insert("insert into " + TABLE_NAME + " ( " + INSERT_FILED + " ) values ( null," +
+    @Insert({"insert into " + TABLE_NAME + " ( " + INSERT_FILED + " ) values ( " +
             "#{hotelId}, " + "#{name}, " + "#{address}, " + "#{price}, " +
-            "#{price}, " + "#{pictureUrl}, " + "#{description}, " + "#{isDelete} )")
+            "#{price}, " + "#{pictureUrl}, " + "#{description}, " + "#{isDelete} )"})
     int addHotel(@Param("hotel") Hotel hotel);
 
-    @Select("select * from " + TABLE_NAME + " where id=#{id}")
+    @Select({"select * from " + TABLE_NAME + " where id=#{id}"})
     Hotel findHotelById(@Param("id") int id);
 
-    @Update("update " + TABLE_NAME + "isDelete=1 where hotelId=#{hotelId}")
+    @Update({"update " + TABLE_NAME + "isDelete=1 where hotelId=#{hotelId}"})
     int updateHotel(@Param("hotelId") int hotelId);
 }

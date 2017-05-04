@@ -15,6 +15,6 @@ public interface ItravelDao {
 
     @Insert({"insert into " + TABLE_NAMEE + " ( " + INSERT_FIELD + " ) values (" + "#{travelid}, "
             + "#{startAddress}, " + "#{endAddress}, " + "#{price}, " + "#{travelType} )"})
-    int addTravel(@Param("travel") Travel travel);
+    int addTravel(Travel travel);
 
 }

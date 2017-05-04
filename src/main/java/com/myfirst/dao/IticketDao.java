@@ -12,13 +12,13 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface IticketDao {
     String TABLE_NAME = "loginticket";
-    String INSERT_FILED = "id,userid,status,ticket,expire";
+    String INSERT_FILED = "userid,status,ticket,expire";
 
-    @Insert("insert into " + TABLE_NAME + " ( " + INSERT_FILED + " ) " + "values ( 0" +
+    @Insert({"insert into " + TABLE_NAME + " ( " + INSERT_FILED + " ) " + "values ( 0" +
             "#{userId}" + "#{status}"
-            + "#{ticket}" + "#{expire}")
-    int addTicket(@Param("loginTicket") LoginTicket loginTicket);
+            + "#{ticket}" + "#{expire}"})
+    int addTicket(LoginTicket loginTicket);
 
-    @Update("update " + TABLE_NAME + "expire=1 where ticket=#{ticket}")
+    @Update({"update " + TABLE_NAME + "expire=1 where ticket=#{ticket}"})
     int deleteTicket(@Param("ticket") String ticket);
 }
