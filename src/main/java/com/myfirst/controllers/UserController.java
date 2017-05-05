@@ -43,9 +43,6 @@ public class UserController {
     @RequestMapping(value = "/reg", method = {RequestMethod.POST})
     @ResponseBody
     public String regUser(@Valid User user, BindingResult result, Model model) {
-        //分配userId;
-        long userid = System.currentTimeMillis() * 10 + user.getUserType();
-        user.setUserId(userid);
         StringBuffer salt = new StringBuffer("");
         for (int i = 0; i < 10; i++) {
             salt.append(String.valueOf(48 + new Random().nextInt(10)));

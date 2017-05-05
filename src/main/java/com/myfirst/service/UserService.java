@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by 58 on 2017/1/17.
@@ -43,10 +44,9 @@ public class UserService {
             LoginTicket loginTicket;
             loginTicket = new LoginTicket();
             loginTicket.setExpired((short) 0);
-            loginTicket.setUserId(user.getUserId());
+            loginTicket.setUserId(user.getId());
             loginTicket.setStatus(0);
-            // TODO: 2017/5/3 ticket产生算法
-            String ticket = "";
+            String ticket = UUID.randomUUID().toString().replaceAll("-", "");
             loginTicket.setTicket(ticket);
             iticketDao.addLoginTicket(loginTicket);
             responeMap.put("ticket", loginTicket.getTicket());

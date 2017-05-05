@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class User {
     private int id;
-    private long userId;
     private String userName;
     private String password;
     private String salt;
@@ -28,9 +27,7 @@ public class User {
         this.id = id;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
+
 
     public void setUserName(String userName) {
         this.userName = userName;
@@ -85,9 +82,6 @@ public class User {
         return id;
     }
 
-    public long getUserId() {
-        return userId;
-    }
 
     public String getUserName() {
         return userName;
