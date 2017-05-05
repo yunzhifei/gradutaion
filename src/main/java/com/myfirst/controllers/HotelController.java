@@ -37,7 +37,7 @@ public class HotelController {
         int hotelId = (int) System.currentTimeMillis() / 10;
         hotel.setHotelId(hotelId);
         hotelService.addHotel(hotel);
-        return "";
+        return "success";
     }
 
     @RequestMapping("/hotel/delete/{hotelId}")
