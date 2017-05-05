@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Created by yunzh on 2017/5/3.
+ * yun zhi fei
  */
 @Service
 public class ViewSpotService {

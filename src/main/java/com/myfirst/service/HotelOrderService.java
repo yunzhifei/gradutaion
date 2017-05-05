@@ -20,4 +20,14 @@ public class HotelOrderService {
     public List<HotelOrder> findAllHotelOrderByUserId(int userId) {
         return hotelOderDao.findAllHotelOrderByUserId(userId);
     }
+
+    //预订旅馆
+    public int bookHotel(HotelOrder hotelOrder) {
+        return hotelOderDao.addHotelOrder(hotelOrder);
+    }
+
+    //支付旅馆费用
+    public int payHotelOrder(int id) {
+        return hotelOderDao.updateHotelOrderPayStateById(id);
+    }
 }
