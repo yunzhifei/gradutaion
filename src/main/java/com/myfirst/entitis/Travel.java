@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class Travel {
     private int id;
-    private int travelid;
     private String startAddress;
     private String endAddress;
     private int price;
@@ -18,9 +17,6 @@ public class Travel {
         this.id = id;
     }
 
-    public void setTravelid(int travelid) {
-        this.travelid = travelid;
-    }
 
     public void setStartAddress(String startAddress) {
         this.startAddress = startAddress;
@@ -40,10 +36,6 @@ public class Travel {
 
     public int getId() {
         return id;
-    }
-
-    public int getTravelid() {
-        return travelid;
     }
 
     public String getStartAddress() {

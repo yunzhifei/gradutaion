@@ -36,7 +36,10 @@ public class UserController {
         if (password.isEmpty() || password.length() < 8) {
             responeMap.put("error", "账户密码长度不足！至少8位！");
         }
-        userService.login(account,password,responeMap);
+        userService.login(account, password, responeMap);
+        //登陆成功
+        if (responeMap.containsKey("ticket")) {
+        }
         return JSON.toJSONString(responeMap);
     }
 
@@ -58,4 +61,6 @@ public class UserController {
 
         return "success";
     }
+
+
 }

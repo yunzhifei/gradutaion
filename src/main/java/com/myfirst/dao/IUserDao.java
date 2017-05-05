@@ -1,10 +1,7 @@
 package com.myfirst.dao;
 
 import com.myfirst.entitis.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 
 /**
@@ -27,4 +24,11 @@ public interface IUserDao {
     @Select("select * from " + TABLE_NAME + "where name=#{name}")
     User findUserByName(@Param("name") String name);
 
+    @Update({"update " + TABLE_NAME + "set userName=#{userName}, " + "name=#{name], " +
+            "sex=#{sex}, " + "age=#{age}, " + "emailAddress=#{emailAddress}, " +
+            "phone=#{phone}, " + "description=#{description}" + " where id=#{id}"})
+    int updateUserInfo(User user);
+
+    @Update({"update " + TABLE_NAME + "set passWord=#{newPassWord} " + "where id=#{id}"})
+    int updateUserPassWord(@Param("id") int id, @Param("newPassWord") String newPassWord);
 }
