@@ -15,7 +15,7 @@ public class HotelService {
     @Autowired
     IHotelDao hotelDao;
 
-    public Hotel findHotlById(int id) {
+    public Hotel findHotelById(int id) {
         return hotelDao.findHotelById(id);
     }
 

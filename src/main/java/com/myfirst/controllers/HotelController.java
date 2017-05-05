@@ -28,7 +28,7 @@ public class HotelController {
 
     @RequestMapping("/hotel/{hotelId}")
     public String hotelDetail(@PathVariable("hotelId") int hotelId) {
-        Hotel hotel = hotelService.findHotlById(hotelId);
+        Hotel hotel = hotelService.findHotelById(hotelId);
         return JSON.toJSONString(hotel);
     }
 

@@ -10,10 +10,10 @@ public class HotelOrder {
     private int id;
     private int hotelId;
     private int personNumber;
-    private int userid;
+    private int userId;
     private byte isDelete;
-    private byte paystate;
-    private byte orderstate;
+    private byte payState;
+    private byte orderState;
 
     public void setId(int id) {
         this.id = id;
@@ -27,21 +27,11 @@ public class HotelOrder {
         this.personNumber = personNumber;
     }
 
-    public void setUserid(int userid) {
-        this.userid = userid;
-    }
 
     public void setIsDelete(byte isDelete) {
         this.isDelete = isDelete;
     }
 
-    public void setPaystate(byte paystate) {
-        this.paystate = paystate;
-    }
-
-    public void setOrderstate(byte orderstate) {
-        this.orderstate = orderstate;
-    }
 
     public int getId() {
 
@@ -56,19 +46,34 @@ public class HotelOrder {
         return personNumber;
     }
 
-    public int getUserid() {
-        return userid;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setPayState(byte payState) {
+        this.payState = payState;
+    }
+
+    public void setOrderState(byte orderState) {
+        this.orderState = orderState;
+    }
+
+    public int getUserId() {
+
+        return userId;
+    }
+
+    public byte getPayState() {
+        return payState;
+    }
+
+    public byte getOrderState() {
+        return orderState;
     }
 
     public byte getIsDelete() {
         return isDelete;
     }
 
-    public byte getPaystate() {
-        return paystate;
-    }
 
-    public byte getOrderstate() {
-        return orderstate;
-    }
 }
