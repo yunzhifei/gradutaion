@@ -3,8 +3,7 @@ package com.myfirst.entitis;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by 58 on 2017/1/17.
- * author yunzhifei
+ * Created by 58 on 2017/1/17
  * author yun zhi fei
  */
 @Component

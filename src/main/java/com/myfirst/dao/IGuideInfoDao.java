@@ -10,7 +10,7 @@ import java.util.List;
  */
 @Mapper
 public interface IGuideInfoDao {
-    String TABLE_NAME = "guideinfo";
+    String TABLE_NAME = "guideInfo";
     String INSERT_FIELD = "name,sex,serverCity,cardId,workYear,priceOfDay,description,isDelete,guideId";
     String SELECT_FIELD = "id," + INSERT_FIELD;
 
@@ -19,10 +19,10 @@ public interface IGuideInfoDao {
             + "#{description}, " + "#{isDelete}, " + "#{guideid}"})
     int addGuideInfo(GuideInfo guideInfo);
 
-    @Select({"select * form " + TABLE_NAME})
+    @Select({"select " + SELECT_FIELD + " form " + TABLE_NAME})
     List<GuideInfo> selectAllGuideInfo();
 
-    @Select({"select * from " + TABLE_NAME + "where travelid=#{travelid}"})
+    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + "where travelid=#{travelid}"})
     GuideInfo selectGuideInfoById(@Param("travelid") int travelid);
 
     @Update({"update " + TABLE_NAME + " set isDelete=1" + "where travelid=#{travelid}"})

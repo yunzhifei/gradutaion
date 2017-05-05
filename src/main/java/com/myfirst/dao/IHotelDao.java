@@ -13,7 +13,7 @@ public interface IHotelDao {
     String TABLE_NAME = "hotel";
     String INSERT_FILED = "hotelId,name,address,price,pictureUrl,Description,isDelete";
 
-    @Select("select * from " + TABLE_NAME)
+    @Select({"select * from " + TABLE_NAME})
     List<Hotel> findAllHotel();
 
     @Insert({"insert into " + TABLE_NAME + " ( " + INSERT_FILED + " ) values ( " +

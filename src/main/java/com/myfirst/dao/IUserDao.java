@@ -21,7 +21,7 @@ public interface IUserDao {
             "#{description}, " + "#{userId}, " + "#{userType}, 0)"})
     int addUser(User user);
 
-    @Select("select * from " + TABLE_NAME + "where name=#{name}")
+    @Select({"select * from " + TABLE_NAME + "where name=#{name}"})
     User findUserByName(@Param("name") String name);
 
     @Update({"update " + TABLE_NAME + "set userName=#{userName}, " + "name=#{name], " +

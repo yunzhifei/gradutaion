@@ -3,7 +3,9 @@ package com.myfirst.entitis;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by yunzh on 2017/5/3.
+ * Created by yun on 2017/5/3.
+ * <p>
+ * yun zhi fei
  */
 @Component
 public class GuideInfo {
