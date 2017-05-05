@@ -18,12 +18,12 @@ public class TravelOrderService {
 
     //预订交通方式
     public int bookTravel(TravelOrder travelOrder) {
-        return travelOrderDao.addTravleOrder(travelOrder);
+        return travelOrderDao.addTravelOrder(travelOrder);
     }
 
     //支付交通费用
     public int payTravel(int id) {
-        return travelOrderDao.updatePayStateById(id);
+        return travelOrderDao.updateTravelOrderPayStateById(id);
     }
 
     //展示该用户下的所有的预订过的方式

@@ -21,11 +21,11 @@ public interface ITravelOrderDao {
     @Insert({"insert into " + TABLE_NAME + " ( " + INSERT_FIELD + " ) values (" +
             "#{bookDate}, " + "#{personNumber}, " + "#{payState}, " + "#{orderState}, "
             + "#{isDelete}, " + "#{userId}, " + "#{travelId} )"})
-    int addTravleOrder(TravelOrder travelOrder);
+    int addTravelOrder(TravelOrder travelOrder);
 
     @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + "where userId=#{userId}"})
     List<TravelOrder> findAllTravelOrderByUserId(@Param("userId") int userId);
 
     @Select({"update " + TABLE_NAME + " set payState=1" + " where id=#{id}"})
-    int updatePayStateById(@Param("id") int id);
+    int updateTravelOrderPayStateById(@Param("id") int id);
 }
