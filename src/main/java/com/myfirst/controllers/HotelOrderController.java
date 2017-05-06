@@ -1,28 +1,28 @@
 package com.myfirst.controllers;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONPObject;
 import com.myfirst.entitis.HotelOrder;
 import com.myfirst.service.HotelOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/5/5.
  * yun zhi fei
  */
-@Controller
+@RestController
 public class HotelOrderController {
     @Autowired
     HotelOrderService hotelOrderService;
 
     //预定旅馆信息
     @RequestMapping(value = "/hotelOrder/add", method = {RequestMethod.GET, RequestMethod.POST})
-    @ResponseBody
     public String bookHotel(@Valid HotelOrder hotelOrder) {
         hotelOrderService.bookHotel(hotelOrder);
         return "success";
@@ -35,5 +35,15 @@ public class HotelOrderController {
         return "success";
     }
 
+
+    //展示一个人所有的预定旅馆订单
+    @RequestMapping(value = "/hotelOrderList")
+
+    public String showHotelOrderList(HttpRequest httpRequest, @RequestParam("callBack") String callBack) {
+        int userId = 0;
+        List<HotelOrder> hotelOrderList = hotelOrderService.findAllHotelOrderByUserId(userId);
+        String result = callBack + "(" + JSON.toJSONString(hotelOrderList) + ")";
+        return result;
+    }
 
 }
