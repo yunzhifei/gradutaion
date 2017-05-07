@@ -66,18 +66,24 @@
 			<artifactId>lombok-pg</artifactId>
 			<version>0.11.3</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.13</version>
+			<version>1.2.31</version>
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.wadpam.openserver/jsonp -->
 		<dependency>
 			<groupId>com.wadpam.openserver</groupId>
 			<artifactId>jsonp</artifactId>
 			<version>28</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>qiniu-java-sdk</artifactId>
+			<version>[7.2.0, 7.2.99]</version>
+		</dependency>
 	</dependencies>
 
 	<build>

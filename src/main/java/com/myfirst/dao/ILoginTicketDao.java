@@ -1,10 +1,7 @@
 package com.myfirst.dao;
 
 import com.myfirst.entitis.LoginTicket;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 /**
  * Created by Administrator on 2017/5/4.
@@ -12,14 +9,17 @@ import org.apache.ibatis.annotations.Update;
  */
 @Mapper
 public interface ILoginTicketDao {
-    String TABLE_NAME = "loginticket";
-    String INSERT_FIELD = "expired,status,ticket,userid";
+    String TABLE_NAME = " loginticket ";
+    String INSERT_FIELD = " expired,status,ticket,userId ";
     String SELECT_FIELD = "id," + INSERT_FIELD;
 
-    @Select({"insert into " + TABLE_NAME + " ( " + INSERT_FIELD + " ) values (" +
-            "#{expired}, " + "#{ticket}, " + "#{status}, " + "#{userid} )"})
+    @Insert({"insert into " + TABLE_NAME + " ( " + INSERT_FIELD + " ) values (" +
+            "#{expired}, " + "#{status}, " + "#{ticket}, " + "#{userId} )"})
     int addLoginTicket(LoginTicket loginTicket);
 
     @Update({"update " + TABLE_NAME + "set expired=1" + "where ticket=#{ticket}"})
     int deleteTicket(@Param("ticket") String ticket);
+
+    @Select("select " + SELECT_FIELD + TABLE_NAME + "where userId=#{userId} and expired=0")
+    LoginTicket selectLoginTicketByUserId(@Param("userId") int userId);
 }

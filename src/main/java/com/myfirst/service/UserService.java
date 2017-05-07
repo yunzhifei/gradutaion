@@ -34,13 +34,15 @@ public class UserService {
     }
 
     //登陆
-    public Map<String, String> login(String account, String password, Map<String, String> responeMap) {
+    public Map<String, Object> login(String account, String password, Map<String, Object> responeMap) {
         User user = findUserByName(account);
         if (null == user) {
             responeMap.put("error", "用户不存在！");
+            return responeMap;
         }
         if (!user.getPassword().equals(password)) {
             responeMap.put("error", "用户名和密码不匹配！");
+            return responeMap;
         } else {
             LoginTicket loginTicket;
             loginTicket = new LoginTicket();
