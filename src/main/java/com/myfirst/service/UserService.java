@@ -44,15 +44,21 @@ public class UserService {
             responeMap.put("error", "用户名和密码不匹配！");
             return responeMap;
         } else {
-            LoginTicket loginTicket;
-            loginTicket = new LoginTicket();
-            loginTicket.setExpired((short) 0);
-            loginTicket.setUserId(user.getId());
-            loginTicket.setStatus(0);
-            String ticket = UUID.randomUUID().toString().replaceAll("-", "");
-            loginTicket.setTicket(ticket);
-            iticketDao.addLoginTicket(loginTicket);
-            responeMap.put("ticket", loginTicket.getTicket());
+            LoginTicket userLoginTicket = iticketDao.findLoginTicketByUserId(user.getId());
+            if (null == userLoginTicket) {
+                LoginTicket loginTicket;
+                loginTicket = new LoginTicket();
+                loginTicket.setExpired((short) 0);
+                loginTicket.setUserId(user.getId());
+                loginTicket.setStatus(0);
+                String ticket = UUID.randomUUID().toString().replaceAll("-", "");
+                loginTicket.setTicket(ticket);
+                iticketDao.addLoginTicket(loginTicket);
+                responeMap.put("ticket", loginTicket.getTicket());
+            } else {
+                responeMap.put("ticket", userLoginTicket.getTicket());
+            }
+
         }
         return responeMap;
     }

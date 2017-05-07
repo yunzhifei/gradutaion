@@ -20,6 +20,6 @@ public interface ILoginTicketDao {
     @Update({"update " + TABLE_NAME + "set expired=1 " + "where ticket=#{ticket}"})
     int deleteTicket(@Param("ticket") String ticket);
 
-    @Select("select " + SELECT_FIELD + TABLE_NAME + "where userId=#{userId} and expired=0")
-    LoginTicket selectLoginTicketByUserId(@Param("userId") int userId);
+    @Select("select " + SELECT_FIELD + " from " + TABLE_NAME + "where userId=#{userId} and expired=0")
+    LoginTicket findLoginTicketByUserId(@Param("userId") int userId);
 }

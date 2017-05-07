@@ -2,17 +2,16 @@ package com.myfirst.controllers;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.myfirst.dao.ILoginTicketDao;
 import com.myfirst.entitis.User;
 import com.myfirst.service.UserService;
-import com.sun.deploy.net.HttpResponse;
-import org.apache.commons.collections.map.HashedMap;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -46,9 +45,7 @@ public class UserController {
         //登陆成功
         if (responeMap.containsKey("ticket")) {
             if (responeMap.containsKey("ticket")) {
-                Cookie cookie = new Cookie("ticket", responeMap.get("ticket").toString());
-                cookie.setPath("/");
-                httpServletResponse.addCookie(cookie);
+                responeMap.put("ticket", responeMap.get("ticket"));
             }
             responeMap.put("logined", true);
         } else {
@@ -83,13 +80,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})
-    public String logout(@RequestParam String callback, @CookieValue("ticket") String ticket) {
+    @ResponseBody
+    public String logout(@RequestParam String callback, @RequestParam String ticket, HttpServletResponse httpServletResponse) {
+        Map<String, Object> responseMap = new HashMap<String, Object>();
         JSONObject resultObject = new JSONObject();
         userService.logout(ticket);
+        responseMap.put("logined", false);
+        Cookie cookie = new Cookie("ticket", ticket);
+        cookie.setMaxAge(0);
+        httpServletResponse.addCookie(cookie);
         resultObject.put("tip", "注销成功!");
-        resultObject.put("model", "");
+        resultObject.put("model", responseMap);
         resultObject.put("success", true);
-        resultObject.put("redirect", "127.0.0.1:8080/");
+//        resultObject.put("redirect", "http://127.0.0.1:8080/");
         resultObject.put("apiName", "account");
         String result = callback + " (' " + resultObject.toJSONString() + " ') ";
         return result;
