@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +34,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public String loginMethod(@RequestParam String account, @RequestParam String password, @RequestParam String callback) {
+    public String loginMethod(@RequestParam String account, @RequestParam String password, @RequestParam String callback, HttpServletResponse httpServletResponse) {
         Map<String, Object> responeMap = new HashMap<String, Object>();
         if (account.isEmpty()) {
             responeMap.put("error", "用户名不可以为空！");
@@ -47,6 +48,7 @@ public class UserController {
             if (responeMap.containsKey("ticket")) {
                 Cookie cookie = new Cookie("ticket", responeMap.get("ticket").toString());
                 cookie.setPath("/");
+                httpServletResponse.addCookie(cookie);
             }
             responeMap.put("logined", true);
         } else {

@@ -10,8 +10,8 @@ import java.util.List;
  */
 @Mapper
 public interface IHotelDao {
-    String TABLE_NAME = "hotel";
-    String INSERT_FILED = "hotelId,name,address,price,pictureUrl,Description,isDelete";
+    String TABLE_NAME = " hotel ";
+    String INSERT_FILED = " hotelId,name,address,price,pictureUrl,Description,isDelete ";
 
     @Select({"select * from " + TABLE_NAME})
     List<Hotel> findAllHotel();

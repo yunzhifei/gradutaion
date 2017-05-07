@@ -11,9 +11,9 @@ import java.util.List;
  */
 @Mapper
 public interface IHotelOderDao {
-    String TABLE_NAME = "hotelOrder";
-    String INSERT_FIELD = "hotelId,personNumber,userId,isDelete,payState,orderState";
-    String SELECT_FIELD = "id," + INSERT_FIELD;
+    String TABLE_NAME = " hotelOrder ";
+    String INSERT_FIELD = " hotelId,personNumber,userId,isDelete,payState,orderState ";
+    String SELECT_FIELD = "id, " + INSERT_FIELD;
 
     @Insert({"insert into " + TABLE_NAME + " ( " + INSERT_FIELD + " ) values ( " + "#{hotelId}, " +
             "#{personNumber}, " + "#{userId}, " + "#{isDelete}, " + "#{payState}, " + "#{orderState} )"})

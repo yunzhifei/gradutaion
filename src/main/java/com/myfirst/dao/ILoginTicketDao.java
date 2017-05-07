@@ -11,13 +11,13 @@ import org.apache.ibatis.annotations.*;
 public interface ILoginTicketDao {
     String TABLE_NAME = " loginticket ";
     String INSERT_FIELD = " expired,status,ticket,userId ";
-    String SELECT_FIELD = "id," + INSERT_FIELD;
+    String SELECT_FIELD = " id," + INSERT_FIELD;
 
     @Insert({"insert into " + TABLE_NAME + " ( " + INSERT_FIELD + " ) values (" +
             "#{expired}, " + "#{status}, " + "#{ticket}, " + "#{userId} )"})
     int addLoginTicket(LoginTicket loginTicket);
 
-    @Update({"update " + TABLE_NAME + "set expired=1" + "where ticket=#{ticket}"})
+    @Update({"update " + TABLE_NAME + "set expired=1 " + "where ticket=#{ticket}"})
     int deleteTicket(@Param("ticket") String ticket);
 
     @Select("select " + SELECT_FIELD + TABLE_NAME + "where userId=#{userId} and expired=0")

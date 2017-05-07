@@ -10,8 +10,8 @@ import org.apache.ibatis.annotations.*;
  */
 @Mapper
 public interface IUserDao {
-    String TABLE_NAME = "user";
-    String INSERT_FIELD = "username,password,salt,sex,name,address,age,phone,emailAddress,description,userid,userType,isDelete";
+    String TABLE_NAME = " user ";
+    String INSERT_FIELD = " username,password,salt,sex,name,address,age,phone,emailAddress,description,userId,userType,isDelete ";
 
     @Select("select * from " + TABLE_NAME + " where id=#{id}")
     User findUserById(@Param("id") int id);

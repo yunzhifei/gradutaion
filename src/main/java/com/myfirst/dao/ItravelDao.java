@@ -14,18 +14,18 @@ import java.util.List;
  */
 @Mapper
 public interface ItravelDao {
-    String TABLE_NAMEE = "travel";
-    String INSERT_FIELD = "travelId,startAddress,endAddress,price,travelType";
-    String SELECT_FIELD = "id," + INSERT_FIELD;
+    String TABLE_NAME = " travel ";
+    String INSERT_FIELD = " travelId,startAddress,endAddress,price,travelType ";
+    String SELECT_FIELD = " id, " + INSERT_FIELD;
 
-    @Insert({"insert into " + TABLE_NAMEE + " ( " + INSERT_FIELD + " ) values (" + "#{travelid}, "
+    @Insert({"insert into " + TABLE_NAME + " ( " + INSERT_FIELD + " ) values (" + "#{travelid}, "
             + "#{startAddress}, " + "#{endAddress}, " + "#{price}, " + "#{travelType} )"})
     int addTravel(Travel travel);
 
 
-    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAMEE})
+    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME})
     List<Travel> findAllTravel();
 
-    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAMEE + "where id=#{id}"})
+    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + "where id=#{id}"})
     Travel findTravelById(@Param("id") int id);
 }
