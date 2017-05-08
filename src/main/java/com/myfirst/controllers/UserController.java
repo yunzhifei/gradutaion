@@ -53,7 +53,7 @@ public class UserController {
         }
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("model", JSON.toJSON(responeMap));
-        jsonObject.put("tip", "成功");
+        jsonObject.put("tip", "登陆成功");
         jsonObject.put("success", "true");
         jsonObject.put("apiName", "account");
         String result = callback + " (' " + jsonObject.toJSONString() + " ') ";
