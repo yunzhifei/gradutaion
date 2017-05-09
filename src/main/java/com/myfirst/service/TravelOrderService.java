@@ -1,6 +1,7 @@
 package com.myfirst.service;
 
 import com.myfirst.dao.ITravelOrderDao;
+import com.myfirst.entitis.HosHolder;
 import com.myfirst.entitis.TravelOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,13 @@ import java.util.List;
 public class TravelOrderService {
     @Autowired
     ITravelOrderDao travelOrderDao;
+    @Autowired
+    HosHolder hosHolder;
 
     //预订交通方式
     public int bookTravel(TravelOrder travelOrder) {
+        int userId = hosHolder.getUser().getId();
+        travelOrder.setUserId(userId);
         return travelOrderDao.addTravelOrder(travelOrder);
     }
 
