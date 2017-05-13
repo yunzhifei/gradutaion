@@ -1,6 +1,7 @@
 package com.myfirst.controllers;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPObject;
 import com.myfirst.entitis.HosHolder;
 import com.myfirst.entitis.TravelOrder;
@@ -35,12 +36,22 @@ public class TravelOrderController {
     }
 
     @RequestMapping("/travelOrder/add")
-    public String bookTravelOrder(@Valid TravelOrder travelOrder) {
+    public String bookTravelOrder(@RequestParam("callback") String callback, @RequestParam("travelId") int travelId, @RequestParam("personNumber") int personNumber, @RequestParam("bookDate") String bookDate) {
+        String result = "";
+        TravelOrder travelOrder = new TravelOrder();
+        JSONObject resultJson = new JSONObject();
+        if (null == hosHolder.getUser()) {
+            resultJson.put("success", false);
+            resultJson.put("tip", "请先登录，再操作订单！");
+            result = callback + " (' " + resultJson.toJSONString() + " ') ";
+            return result;
+        }
+        result = callback + " (' " + resultJson.toJSONString() + " ') ";
+        travelOrder.setBookDate(bookDate);
         travelOrder.setUserId(hosHolder.getUser().getId());
-        int result = travelOrderService.bookTravel(travelOrder);
-        return "success";
+        int s = travelOrderService.bookTravel(travelOrder);
+        return result;
     }
-
 
 
 }

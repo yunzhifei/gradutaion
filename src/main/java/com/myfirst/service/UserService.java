@@ -2,6 +2,7 @@ package com.myfirst.service;
 
 import com.myfirst.dao.ILoginTicketDao;
 import com.myfirst.dao.IUserDao;
+import com.myfirst.entitis.HosHolder;
 import com.myfirst.entitis.LoginTicket;
 import com.myfirst.entitis.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class UserService {
     IUserDao iUserDao;
     @Autowired
     ILoginTicketDao iticketDao;
+    @Autowired
+    HosHolder hosHolder;
 
     public User findUserById(int userId) {
         return iUserDao.findUserById(userId);
@@ -44,6 +47,7 @@ public class UserService {
             responeMap.put("error", "用户名和密码不匹配！");
             return responeMap;
         } else {
+            hosHolder.setUser(user);
             LoginTicket userLoginTicket = iticketDao.findLoginTicketByUserId(user.getId());
             if (null == userLoginTicket) {
                 LoginTicket loginTicket;

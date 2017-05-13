@@ -2,6 +2,7 @@ package com.myfirst.controllers;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.myfirst.entitis.HosHolder;
 import com.myfirst.entitis.User;
 import com.myfirst.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +31,14 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    HosHolder hosHolder;
 
     @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public String loginMethod(@RequestParam String account, @RequestParam String password, @RequestParam String callback, HttpServletResponse httpServletResponse) {
         Map<String, Object> responeMap = new HashMap<String, Object>();
+        JSONObject jsonObject = new JSONObject();
         if (account.isEmpty()) {
             responeMap.put("error", "用户名不可以为空！");
         }
@@ -48,12 +52,14 @@ public class UserController {
                 responeMap.put("ticket", responeMap.get("ticket"));
             }
             responeMap.put("logined", true);
+            jsonObject.put("tip", "登陆成功");
         } else {
             responeMap.put("logined", false);
+            jsonObject.put("tip", responeMap.get("error"));
         }
-        JSONObject jsonObject = new JSONObject();
+
         jsonObject.put("model", JSON.toJSON(responeMap));
-        jsonObject.put("tip", "登陆成功");
+
         jsonObject.put("success", "true");
         jsonObject.put("apiName", "account");
         String result = callback + " (' " + jsonObject.toJSONString() + " ') ";
@@ -94,6 +100,7 @@ public class UserController {
         resultObject.put("success", true);
 //        resultObject.put("redirect", "http://127.0.0.1:8080/");
         resultObject.put("apiName", "account");
+        hosHolder.clear();
         String result = callback + " (' " + resultObject.toJSONString() + " ') ";
         return result;
     }

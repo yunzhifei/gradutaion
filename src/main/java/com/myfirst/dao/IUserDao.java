@@ -11,14 +11,14 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface IUserDao {
     String TABLE_NAME = " user ";
-    String INSERT_FIELD = " username,password,salt,sex,name,address,age,phone,emailAddress,description,userId,userType,isDelete ";
+    String INSERT_FIELD = " username,password,salt,sex,name,address,age,phone,emailAddress,description,userType,isDelete ";
 
     @Select("select * from " + TABLE_NAME + " where id=#{id}")
     User findUserById(@Param("id") int id);
 
     @Insert({"insert into " + TABLE_NAME + " ( " + INSERT_FIELD + " ) " + " values ( " + "#{userName}, " + "#{password}, " + "#{salt}, "
             + "#{sex}, " + "#{name}, " + "#{address}, " + "#{age}, " + "#{phone}, " + "#{emailAddress}, " +
-            "#{description}, " + "#{userId}, " + "#{userType}, 0)"})
+            "#{description}, "  + "#{userType}, 0)"})
     int addUser(User user);
 
     @Select({"select * from " + TABLE_NAME + " where userName=#{userName}"})

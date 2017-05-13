@@ -32,10 +32,11 @@ public class TravelController {
         Map<String, Object> modelx = new HashMap<String, Object>();
         List<ListViewObject> list = new ArrayList<>();
         for (Travel travel : travels) {
-            ListViewObject viewObject = new ListViewObject();
+            ListViewObject viewObject = new ListViewObject<Travel>();
             viewObject.setId(travel.getId());
             viewObject.setTitle(travel.getTravelType());
             viewObject.setContent(travel.getStartAddress() + " 到 " + travel.getEndAddress());
+            viewObject.setEntity(travel);
             list.add(viewObject);
         }
         int count = travelService.findTravelCount();
