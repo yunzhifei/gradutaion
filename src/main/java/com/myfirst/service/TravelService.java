@@ -17,8 +17,8 @@ public class TravelService {
     ItravelDao travelDao;
 
     //展示所有的出行方式信息
-    public List<Travel> findAllTravel() {
-        return travelDao.findAllTravel();
+    public List<Travel> findAllTravel(int size, int page) {
+        return travelDao.findOnePageTravel((page - 1) * size, size);
     }
 
     //添加出行方式信息
@@ -31,4 +31,7 @@ public class TravelService {
         return travelDao.findTravelById(id);
     }
 
+    public int findTravelCount() {
+        return travelDao.findCount();
+    }
 }

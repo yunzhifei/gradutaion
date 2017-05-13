@@ -23,9 +23,13 @@ public class HomeController {
 
     @RequestMapping(value = {"/", "/index"})
     public String index(Model model) {
-        List<ViewSpot> viewSpots = viewSpotService.findAllViewSpot();
-        model.addAttribute("viewSpots", viewSpots);
-        return "hello";
+
+        return "datav";
+    }
+
+    @RequestMapping(value = "/news")
+    public String graduation(Model model) {
+        return "graduation";
     }
 
 }

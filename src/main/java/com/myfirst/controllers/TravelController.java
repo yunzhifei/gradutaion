@@ -1,6 +1,7 @@
 package com.myfirst.controllers;
 
 import com.alibaba.fastjson.JSONObject;
+import com.myfirst.entitis.ListViewObject;
 import com.myfirst.entitis.Travel;
 import com.myfirst.service.TravelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/5/9.
@@ -22,12 +26,23 @@ public class TravelController {
     TravelService travelService;
 
     @RequestMapping(value = "/travel/list")
-    public String findAllTravel(@RequestParam("callback") String callback) {
-        List<Travel> travels = travelService.findAllTravel();
+    public String findAllTravel(@RequestParam("callback") String callback, @RequestParam("page") int pagge, @RequestParam("size") int size) {
+        List<Travel> travels = travelService.findAllTravel(size, pagge);
         JSONObject resultJson = new JSONObject();
-        resultJson.put("model", travels);
+        Map<String, Object> modelx = new HashMap<String, Object>();
+        List<ListViewObject> list = new ArrayList<>();
+        for (Travel travel : travels) {
+            ListViewObject viewObject = new ListViewObject();
+            viewObject.setId(travel.getId());
+            viewObject.setTitle(travel.getTravelType());
+            viewObject.setContent(travel.getStartAddress() + " 到 " + travel.getEndAddress());
+            list.add(viewObject);
+        }
+        int count = travelService.findTravelCount();
+        modelx.put("data", list);
+        modelx.put("count", count);
+        resultJson.put("model", modelx);
         resultJson.put("success", true);
-        resultJson.put("apiName", "travels");
         String result = callback + " (' " + resultJson.toJSONString() + " ') ";
         return result;
     }

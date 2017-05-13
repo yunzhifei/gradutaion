@@ -12,7 +12,6 @@ public class User {
     private String userName;
     private String password;
     private String salt;
-    private byte sex;
     private String name;
     private String address;
     private short userType;
@@ -21,11 +20,20 @@ public class User {
     private String emailAddress;
     private String description;
     private short isDelete;
+    String sex;
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getSex() {
+
+        return sex;
+    }
 
     public void setId(int id) {
         this.id = id;
     }
-
 
 
     public void setUserName(String userName) {
@@ -40,9 +48,6 @@ public class User {
         this.salt = salt;
     }
 
-    public void setSex(byte sex) {
-        this.sex = sex;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -94,9 +99,6 @@ public class User {
         return salt;
     }
 
-    public byte getSex() {
-        return sex;
-    }
 
     public String getName() {
         return name;
