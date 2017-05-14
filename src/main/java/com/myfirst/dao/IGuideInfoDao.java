@@ -11,20 +11,23 @@ import java.util.List;
 @Mapper
 public interface IGuideInfoDao {
     String TABLE_NAME = " guideInfo ";
-    String INSERT_FIELD = " name,sex,serverCity,cardId,workYear,priceOfDay,description,isDelete,guideId ";
+    String INSERT_FIELD = " name,sex,serverCity,cardId,workYear,priceOfDay,description,img,isDelete ";
     String SELECT_FIELD = " id, " + INSERT_FIELD;
 
     @Insert({"insert into " + TABLE_NAME + " ( " + INSERT_FIELD + " )  values (" +
-            "#{name}, " + "#{sex}, " + "#{cardId}, " + "#{workYear}, " + "#{priceOfDay}, "
-            + "#{description}, " + "#{isDelete}, " + "#{guideid}"})
+            "#{name}, " + "#{sex}, " + "#{serverCity}," + "#{cardId}, " + "#{workYear}, " + "#{priceOfDay}, "
+            + "#{description}, " + "#{img}, " + "0 )"})
     int addGuideInfo(GuideInfo guideInfo);
 
-    @Select({"select " + SELECT_FIELD + " form " + TABLE_NAME})
-    List<GuideInfo> selectAllGuideInfo();
+    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + " limit #{offset},#{rows}"})
+    List<GuideInfo> selectAllGuideInfo(@Param("offset") int offset, @Param("rows") int rows);
 
     @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + "where travelid=#{travelid}"})
     GuideInfo selectGuideInfoById(@Param("travelid") int travelid);
 
     @Update({"update " + TABLE_NAME + " set isDelete=1" + "where travelid=#{travelid}"})
     int deleteGuideInfoById(@Param("travelid") int travelid);
+
+    @Select({"select count(1) from " + TABLE_NAME})
+    int findGuideInfoCount();
 }

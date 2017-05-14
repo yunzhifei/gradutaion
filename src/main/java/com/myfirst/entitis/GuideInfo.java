@@ -11,20 +11,30 @@ import org.springframework.stereotype.Component;
 public class GuideInfo {
     private int id;
     private String name;
-    private byte sex;
+    private String sex;
     private String serverCity;
     private String cardId;
     private String workYear;
     private String priceOfDay;
     private String description;
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getImg() {
+
+        return img;
+    }
+
+    private String img;
     private byte isDelete;
-    private int guideId;
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setSex(byte sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -49,9 +59,6 @@ public class GuideInfo {
         this.isDelete = isDelete;
     }
 
-    public void setGuideId(int guideId) {
-        this.guideId = guideId;
-    }
 
     public int getId() {
 
@@ -62,7 +69,7 @@ public class GuideInfo {
         return name;
     }
 
-    public byte getSex() {
+    public String getSex() {
         return sex;
     }
 
@@ -95,9 +102,6 @@ public class GuideInfo {
         return isDelete;
     }
 
-    public int getGuideId() {
-        return guideId;
-    }
 
     public void setId(int id) {
 

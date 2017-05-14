@@ -8,6 +8,17 @@ public class ListViewObject<T> {
     int id;
     String title;
     String content;
+    String img;
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getImg() {
+
+        return img;
+    }
+
     T entity;
 
     public void setEntity(T entity) {

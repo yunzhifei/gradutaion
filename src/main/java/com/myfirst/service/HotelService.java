@@ -34,4 +34,16 @@ public class HotelService {
     public int deleteHotel(int hotelId) {
         return hotelDao.updateHotel(hotelId);
     }
+
+
+    //分页展示旅馆信息
+    public List<Hotel> findOnePageHotel(int size, int page) {
+        return hotelDao.findOnePageHotel(page * size, size);
+    }
+    //获取旅馆总数
+
+    public int findHotelCount() {
+        return hotelDao.findHotelCount();
+    }
+
 }

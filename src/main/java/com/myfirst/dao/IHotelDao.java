@@ -16,6 +16,9 @@ public interface IHotelDao {
     @Select({"select * from " + TABLE_NAME})
     List<Hotel> findAllHotel();
 
+    @Select({" select * from " + TABLE_NAME + " limit #{offset},#{rows}"})
+    List<Hotel> findOnePageHotel(@Param("offset") int offset, @Param("rows") int rows);
+
     @Insert({"insert into " + TABLE_NAME + " ( " + INSERT_FILED + " ) values ( " +
             "#{hotelId}, " + "#{name}, " + "#{address}, " + "#{price}, " +
             "#{price}, " + "#{pictureUrl}, " + "#{description}, " + "#{isDelete} )"})
@@ -26,4 +29,8 @@ public interface IHotelDao {
 
     @Update({"update " + TABLE_NAME + "isDelete=1 where hotelId=#{hotelId}"})
     int updateHotel(@Param("hotelId") int hotelId);
+
+
+    @Select({"select count(1) from " + TABLE_NAME})
+    int findHotelCount();
 }

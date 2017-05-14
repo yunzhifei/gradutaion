@@ -26,8 +26,8 @@ public class TravelController {
     TravelService travelService;
 
     @RequestMapping(value = "/travel/list")
-    public String findAllTravel(@RequestParam("callback") String callback, @RequestParam("page") int pagge, @RequestParam("size") int size) {
-        List<Travel> travels = travelService.findAllTravel(size, pagge);
+    public String findAllTravel(@RequestParam("callback") String callback, @RequestParam("page") int page, @RequestParam("size") int size) {
+        List<Travel> travels = travelService.findAllTravel(size, page);
         JSONObject resultJson = new JSONObject();
         Map<String, Object> modelx = new HashMap<String, Object>();
         List<ListViewObject> list = new ArrayList<>();

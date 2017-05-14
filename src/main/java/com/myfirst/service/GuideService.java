@@ -22,11 +22,11 @@ public class GuideService {
     }
 
     //展示导游信息
-    public List<GuideInfo> showGuideInfo() {
-        return guideInfoDao.selectAllGuideInfo();
+    public List<GuideInfo> showGuideInfo(int size,int page) {
+        return guideInfoDao.selectAllGuideInfo(page*size,size);
     }
 
-    //展示具体每一天导游信息
+    //展示具体每一个导游信息
     public GuideInfo showGuideInfoByid(int travelid) {
         return guideInfoDao.selectGuideInfoById(travelid);
     }
@@ -34,5 +34,10 @@ public class GuideService {
     //删除导游信息
     public int deleteGuideInfo(int travelid) {
         return guideInfoDao.deleteGuideInfoById(travelid);
+    }
+
+    //获取导游总数
+    public int findGuideInfoCount() {
+        return guideInfoDao.findGuideInfoCount();
     }
 }
