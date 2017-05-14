@@ -1,7 +1,9 @@
 package com.myfirst.controllers;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPObject;
+import com.myfirst.entitis.HosHolder;
 import com.myfirst.entitis.HotelOrder;
 import com.myfirst.service.HotelOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +22,28 @@ import java.util.List;
 public class HotelOrderController {
     @Autowired
     HotelOrderService hotelOrderService;
+    @Autowired
+    HosHolder hosHolder;
 
     //预定旅馆信息
     @RequestMapping(value = "/hotelOrder/add", method = {RequestMethod.GET, RequestMethod.POST})
-    public String bookHotel(@Valid HotelOrder hotelOrder) {
+    public String bookHotel(@RequestParam("callback") String callback, @RequestParam("id") int hotelId, @RequestParam("personNumber") int personNumber, @RequestParam("bookDate") String bookDate) {
+        HotelOrder hotelOrder = new HotelOrder();
+        String result = "";
+        JSONObject resultJson = new JSONObject();
+        if (null == hosHolder.getUser()) {
+            resultJson.put("success", false);
+            resultJson.put("tip", "请先登录，再操作订单！");
+            result = callback + " (' " + resultJson.toJSONString() + " ') ";
+            return result;
+        }
+        resultJson.put("tip", "预定成功!");
+        hotelOrder.setHotelId(hotelId);
+        hotelOrder.setPersonNumber(personNumber);
+        hotelOrder.setUserId(hosHolder.getUser().getId());
         hotelOrderService.bookHotel(hotelOrder);
-        return "success";
+        result = callback + " (' " + resultJson.toJSONString() + " ') ";
+        return result;
     }
 
     //支付旅馆费用

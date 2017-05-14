@@ -36,7 +36,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
-    public String loginMethod(@RequestParam String account, @RequestParam String password, @RequestParam String callback, HttpServletResponse httpServletResponse) {
+    public String loginMethod(@RequestParam("account") String account, @RequestParam("password") String password, @RequestParam("callback") String callback, HttpServletResponse httpServletResponse) {
         Map<String, Object> responeMap = new HashMap<String, Object>();
         JSONObject jsonObject = new JSONObject();
         if (account.isEmpty()) {
