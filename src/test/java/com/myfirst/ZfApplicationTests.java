@@ -11,10 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.io.*;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ZfApplication.class)
@@ -126,46 +124,66 @@ public class ZfApplicationTests {
     @Autowired
     IHotelDao hotelDao;
 
+
+    //        File file = new File("city.txt");
+//        FileInputStream fileInputStream = new FileInputStream(file);
+//        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, "UTF-8");
+//        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//        String line = null;
+//        List<String> cityList = new LinkedList<String>();
+//        while ((line = bufferedReader.readLine()) != null) {
+//            String[] citys = line.split("\t");
+//            for (String city : citys) {
+//                cityList.add(city);
+//            }
+//        }
+//
+//        File file1 = new File("hotel.txt");
+//        FileInputStream fileInputStream1 = new FileInputStream(file1);
+//        InputStreamReader inputStreamReader1 = new InputStreamReader(fileInputStream1, "UTF-8");
+//        BufferedReader bufferedReader1 = new BufferedReader(inputStreamReader1);
+//        String line1 = null;
+//        List<String> cityList1 = new LinkedList<String>();
+//        while ((line1 = bufferedReader1.readLine()) != null) {
+//            String[] citys1 = line1.split("\t");
+//            for (String city : citys1) {
+//                cityList1.add(city);
+//            }
+//        }
+//        Hotel hotel = new Hotel();
+//
+//        for (int i = 0; i < 100; i++) {
+//            int price = new Random().nextInt(500) % 200 + 300;
+//            int hotel1 = new Random().nextInt(cityList1.size());
+//            int randomCity = new Random().nextInt(cityList.size());
+//            hotel.setAddress(cityList.get(randomCity));
+//            hotel.setDescription("世界第一豪华旅馆");
+//            hotel.setName(cityList1.get(hotel1));
+//            hotel.setPictureUrl("http://opkb3ene9.bkt.clouddn.com/hotel" + (i % 10 + 1) + ".jpg");
+//            System.out.println("hotel.getPictureUrl() = " + hotel.getPictureUrl());
+//            hotel.setPrice(price);
+//            hotelDao.addHotel(hotel);
+//        }
+//    }
+    @Autowired
+    ITravelNewDao travelNewDao;
+
     @Test
-    public void testDate1() throws IOException {
-        File file = new File("city.txt");
-        FileInputStream fileInputStream = new FileInputStream(file);
-        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, "UTF-8");
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-        String line = null;
-        List<String> cityList = new LinkedList<String>();
-        while ((line = bufferedReader.readLine()) != null) {
-            String[] citys = line.split("\t");
-            for (String city : citys) {
-                cityList.add(city);
-            }
-        }
-
-        File file1 = new File("hotel.txt");
-        FileInputStream fileInputStream1 = new FileInputStream(file1);
-        InputStreamReader inputStreamReader1 = new InputStreamReader(fileInputStream1, "UTF-8");
-        BufferedReader bufferedReader1 = new BufferedReader(inputStreamReader1);
-        String line1 = null;
-        List<String> cityList1 = new LinkedList<String>();
-        while ((line1 = bufferedReader1.readLine()) != null) {
-            String[] citys1 = line1.split("\t");
-            for (String city : citys1) {
-                cityList1.add(city);
-            }
-        }
-        Hotel hotel = new Hotel();
-
+    public void Test() {
+        TravelNews travelNews = new TravelNews();
+        Calendar calendar = Calendar.getInstance();
+        Random random = new Random();
         for (int i = 0; i < 100; i++) {
-            int price = new Random().nextInt(500) % 200 + 300;
-            int hotel1 = new Random().nextInt(cityList1.size());
-            int randomCity = new Random().nextInt(cityList.size());
-            hotel.setAddress(cityList.get(randomCity));
-            hotel.setDescription("世界第一豪华旅馆");
-            hotel.setName(cityList1.get(hotel1));
-            hotel.setPictureUrl("http://opkb3ene9.bkt.clouddn.com/hotel" + (i % 10 + 1) + ".jpg");
-            System.out.println("hotel.getPictureUrl() = " + hotel.getPictureUrl());
-            hotel.setPrice(price);
-            hotelDao.addHotel(hotel);
+            calendar.add(Calendar.DAY_OF_YEAR, random.nextInt(100) - 100);
+            calendar.set(Calendar.MINUTE, random.nextInt(60));
+            calendar.set(Calendar.HOUR, random.nextInt(24));
+            calendar.set(Calendar.SECOND, random.nextInt(60));
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
+            travelNews.setTitle("asdfasdf");
+            travelNews.setContent("asfdasfd");
+            travelNews.setCreateDate(simpleDateFormat.format(calendar.getTime()));
+            travelNews.setPicture("http://opkb3ene9.bkt.clouddn.com/tavelNews" + (i % 10 + 1) + ".jpg");
+            travelNewDao.addTravelNew(travelNews);
         }
     }
 }

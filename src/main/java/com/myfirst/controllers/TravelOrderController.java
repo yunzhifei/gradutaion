@@ -36,7 +36,7 @@ public class TravelOrderController {
     }
 
     @RequestMapping("/travelOrder/add")
-    public String bookTravelOrder(@RequestParam("callback") String callback, @RequestParam("travelId") int travelId, @RequestParam("personNumber") int personNumber, @RequestParam("bookDate") String bookDate) {
+    public String bookTravelOrder(@RequestParam("callback") String callback, @RequestParam("id") int travelId, @RequestParam("personNumber") int personNumber, @RequestParam("bookDate") String bookDate) {
         String result = "";
         TravelOrder travelOrder = new TravelOrder();
         JSONObject resultJson = new JSONObject();
@@ -46,10 +46,13 @@ public class TravelOrderController {
             result = callback + " (' " + resultJson.toJSONString() + " ') ";
             return result;
         }
-        result = callback + " (' " + resultJson.toJSONString() + " ') ";
+        resultJson.put("tip", "订单提交成功!");
         travelOrder.setBookDate(bookDate);
+        travelOrder.setPersonNumber(personNumber);
+        travelOrder.setTravelId(travelId);
         travelOrder.setUserId(hosHolder.getUser().getId());
         int s = travelOrderService.bookTravel(travelOrder);
+        result = callback + " (' " + resultJson.toJSONString() + " ') ";
         return result;
     }
 

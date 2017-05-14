@@ -11,8 +11,8 @@ public class TravelOrder {
     private int id;
     private String bookDate;
     private int personNumber;
-    private byte paystate;
-    private byte orderstate;
+    private byte payState;
+    private byte orderState;
     private byte isDelete;
     private long userId;
     private int travelId;
@@ -29,13 +29,6 @@ public class TravelOrder {
         this.personNumber = personNumber;
     }
 
-    public void setPaystate(byte paystate) {
-        this.paystate = paystate;
-    }
-
-    public void setOrderstate(byte orderstate) {
-        this.orderstate = orderstate;
-    }
 
     public void setIsDelete(byte isDelete) {
         this.isDelete = isDelete;
@@ -62,12 +55,21 @@ public class TravelOrder {
         return personNumber;
     }
 
-    public byte getPaystate() {
-        return paystate;
+    public void setPayState(byte payState) {
+        this.payState = payState;
     }
 
-    public byte getOrderstate() {
-        return orderstate;
+    public void setOrderState(byte orderState) {
+        this.orderState = orderState;
+    }
+
+    public byte getPayState() {
+
+        return payState;
+    }
+
+    public byte getOrderState() {
+        return orderState;
     }
 
     public byte getIsDelete() {
