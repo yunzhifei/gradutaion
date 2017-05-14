@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface IHotelDao {
     String TABLE_NAME = " hotel ";
-    String INSERT_FILED = " hotelId,name,address,price,pictureUrl,Description,isDelete ";
+    String INSERT_FILED = " name,address,price,pictureUrl,Description,isDelete ";
 
     @Select({"select * from " + TABLE_NAME})
     List<Hotel> findAllHotel();
@@ -20,9 +20,9 @@ public interface IHotelDao {
     List<Hotel> findOnePageHotel(@Param("offset") int offset, @Param("rows") int rows);
 
     @Insert({"insert into " + TABLE_NAME + " ( " + INSERT_FILED + " ) values ( " +
-            "#{hotelId}, " + "#{name}, " + "#{address}, " + "#{price}, " +
-            "#{price}, " + "#{pictureUrl}, " + "#{description}, " + "#{isDelete} )"})
-    int addHotel(@Param("hotel") Hotel hotel);
+             "#{name}, " + "#{address}, " + "#{price}, " +
+             "#{pictureUrl}, " + "#{description}, " + "#{isDelete} )"})
+    int addHotel(Hotel hotel);
 
     @Select({"select * from " + TABLE_NAME + " where id=#{id}"})
     Hotel findHotelById(@Param("id") int id);

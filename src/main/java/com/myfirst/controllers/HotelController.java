@@ -38,7 +38,7 @@ public class HotelController {
             ListViewObject viewObject = new ListViewObject<Hotel>();
             viewObject.setId(hotel.getId());
             viewObject.setTitle(hotel.getName());
-            viewObject.setContent(hotel.getDescription().substring(0, 10));
+            viewObject.setContent(hotel.getDescription().substring(0, 5));
             viewObject.setEntity(hotel);
             viewObject.setImg(hotel.getPictureUrl());
             list.add(viewObject);
@@ -62,7 +62,6 @@ public class HotelController {
     @RequestMapping("/hotel/add")
     public String addHotel(@Valid Hotel hotel) {
         int hotelId = (int) System.currentTimeMillis() / 10;
-        hotel.setHotelId(hotelId);
         hotelService.addHotel(hotel);
         return "success";
     }

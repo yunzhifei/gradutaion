@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Hotel {
     int id;
-    int hotelId;
+
     String name;
     String address;
     int price;
@@ -51,14 +51,7 @@ public class Hotel {
         return id;
     }
 
-    public void setHotelId(int hotelId) {
-        this.hotelId = hotelId;
-    }
 
-    public int getHotelId() {
-
-        return hotelId;
-    }
 
     public String getName() {
         return name;
