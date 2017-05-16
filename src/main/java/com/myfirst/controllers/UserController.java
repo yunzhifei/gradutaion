@@ -68,21 +68,26 @@ public class UserController {
 
     @RequestMapping(value = "/reg", method = {RequestMethod.POST})
     @ResponseBody
-    public String regUser(@Valid User user, BindingResult result, Model model) {
+    public String regUser(@Valid User user, BindingResult result, Model model, @RequestParam("callback") String callback) {
+        String resultString = "";
         StringBuffer salt = new StringBuffer("");
         for (int i = 0; i < 10; i++) {
             salt.append(String.valueOf(48 + new Random().nextInt(10)));
         }
+        JSONObject resultObject = new JSONObject();
+
+        resultObject.put("apiName", "account");
         user.setSalt(salt.toString());
         int useId = 0;
         try {
-            useId = userService.addUser(user);
+            userService.addUser(user);
         } catch (Exception e) {
-
+            resultObject.put("success", false);
         }
+        resultObject.put("success", true);
         System.out.println("useid = " + useId);
-
-        return "success";
+        resultString = callback + " (' " + resultObject.toJSONString() + " ') ";
+        return resultString;
     }
 
     @RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})
@@ -98,10 +103,31 @@ public class UserController {
         resultObject.put("tip", "注销成功!");
         resultObject.put("model", responseMap);
         resultObject.put("success", true);
-//        resultObject.put("redirect", "http://127.0.0.1:8080/");
         resultObject.put("apiName", "account");
         hosHolder.clear();
         String result = callback + " (' " + resultObject.toJSONString() + " ') ";
         return result;
+    }
+
+    @RequestMapping(value = "/changePassWord")
+    public String changPassWord(@RequestParam("oldPassWord") String oldPassWord, @RequestParam("newPassWord") String newPassWord, @RequestParam("callback") String callback) {
+        Map<String, Object> responseMap = new HashMap<String, Object>();
+        JSONObject resultObject = new JSONObject();
+
+        if (null == hosHolder.getUser()) {
+            responseMap.put("error", "用户未登录！");
+        }
+        userService.updatePassword(hosHolder.getUser().getId(), oldPassWord, newPassWord, responseMap);
+        if (responseMap.containsKey("error")) {
+            resultObject.put("tip", responseMap.get("error"));
+            resultObject.put("success", false);
+            String result = callback + " (' " + resultObject.toJSONString() + " ') ";
+            return result;
+        }
+        resultObject.put("tip", "修改成功!");
+        resultObject.put("success", true);
+        String result = callback + " (' " + resultObject.toJSONString() + " ') ";
+        return result;
+
     }
 }

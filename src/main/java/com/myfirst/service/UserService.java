@@ -78,11 +78,11 @@ public class UserService {
     }
 
     //修改密码
-    public int updatePassword(int id, String oldPassWord, String newPassWord) {
+    public int updatePassword(int id, String oldPassWord, String newPassWord, Map<String, Object> responseMap) {
         //先判断用户的老密码正确与否
         User user = iUserDao.findUserById(id);
         if (null == user || !user.getPassword().equals(oldPassWord)) {
-            return -1;
+            responseMap.put("error", "旧密码不正确！");
         }
         return iUserDao.updateUserPassWord(id, newPassWord);
     }
