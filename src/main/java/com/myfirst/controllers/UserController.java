@@ -2,24 +2,21 @@ package com.myfirst.controllers;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.myfirst.entitis.GuideInfo;
 import com.myfirst.entitis.HosHolder;
+import com.myfirst.entitis.ListViewObject;
 import com.myfirst.entitis.User;
 import com.myfirst.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by 58 on 2017/2/8.
@@ -110,6 +107,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/changePassWord")
+    @ResponseBody
     public String changPassWord(@RequestParam("oldPassWord") String oldPassWord, @RequestParam("newPassWord") String newPassWord, @RequestParam("callback") String callback) {
         Map<String, Object> responseMap = new HashMap<String, Object>();
         JSONObject resultObject = new JSONObject();
@@ -129,5 +127,51 @@ public class UserController {
         String result = callback + " (' " + resultObject.toJSONString() + " ') ";
         return result;
 
+    }
+
+    //用户管理模块,删除用户
+    @RequestMapping(value = "/user/delete")
+    @ResponseBody
+    public String deleteUserById(@RequestParam("id") int userId, @RequestParam("callback") String callback) {
+        Map<String, Object> responseMap = new HashMap<String, Object>();
+        JSONObject resultObject = new JSONObject();
+        String result = "";
+        userService.deleteUserById(userId, responseMap);
+        if (responseMap.containsKey("error")) {
+            resultObject.put("tip", "删除失败用户不存在！");
+            resultObject.put("success", false);
+            result = callback + " (' " + resultObject.toJSONString() + " ') ";
+            return result;
+        }
+        resultObject.put("tip", "删除成功!");
+        resultObject.put("model", responseMap);
+        resultObject.put("success", true);
+        hosHolder.clear();
+        result = callback + " (' " + resultObject.toJSONString() + " ') ";
+        return result;
+    }
+
+    //用户管理显示所有的用户
+    @RequestMapping(value = "/user/list")
+    @ResponseBody
+    public String userList(@RequestParam("callback") String callback, @RequestParam("page") int page, @RequestParam("size") int size) {
+        List<User> users = userService.findAllUndeleteUser(size, page - 1);
+        JSONObject resultJson = new JSONObject();
+        Map<String, Object> modelx = new HashMap<String, Object>();
+        List<ListViewObject> list = new ArrayList<>();
+        for (User user : users) {
+            ListViewObject viewObject = new ListViewObject<GuideInfo>();
+            viewObject.setId(user.getId());
+            viewObject.setContent("用户名： " + user.getUserName() + "用户住址：" + user.getAddress() + " 用户性别 ： " + user.getSex() + " 用户邮箱： " + user.getEmailAddress());
+            viewObject.setEntity(user);
+            list.add(viewObject);
+        }
+        int count = userService.findUserCountUndelete();
+        modelx.put("data", list);
+        modelx.put("count", count);
+        resultJson.put("model", modelx);
+        resultJson.put("success", true);
+        String result = callback + " (' " + resultJson.toJSONString() + " ') ";
+        return result;
     }
 }

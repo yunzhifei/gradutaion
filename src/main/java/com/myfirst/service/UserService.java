@@ -8,6 +8,7 @@ import com.myfirst.entitis.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -86,4 +87,29 @@ public class UserService {
         }
         return iUserDao.updateUserPassWord(id, newPassWord);
     }
+
+    //删除用户
+    public int deleteUserById(int userId, Map<String, Object> responseMap) {
+        User user = iUserDao.findUserById(userId);
+        if (null == user) {
+            responseMap.put("error", "用户不存在！");
+            return -1;
+        }
+        int result = iUserDao.updateUserIsDeleteById(userId);
+        return result;
+    }
+
+    //查找所有未被删除的用户
+    public List<User> findAllUndeleteUser(int size, int page) {
+        return iUserDao.findUserUndelete(page * size, size);
+    }
+
+    //计算所有未被删除的用户数目
+    public int findUserCountUndelete() {
+        return iUserDao.findUserCount();
+    }
 }
+
+
+
+
