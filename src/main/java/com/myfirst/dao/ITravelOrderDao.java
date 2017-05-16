@@ -1,10 +1,7 @@
 package com.myfirst.dao;
 
 import com.myfirst.entitis.TravelOrder;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -28,4 +25,10 @@ public interface ITravelOrderDao {
 
     @Select({"update " + TABLE_NAME + " set payState=1" + " where id=#{id}"})
     int updateTravelOrderPayStateById(@Param("id") int id);
+
+    @Update({"update " + TABLE_NAME + "set isDelete=1 " + "where id=#{travelOrderId}"})
+    int updateTravelOrderIsDelete(@Param("travelOrderId") int travelOrderId);
+
+    @Select({"select " + INSERT_FIELD + " from " + TABLE_NAME + " where id=#{id}"})
+    TravelOrder findTravelOrderById(@Param("id") int id);
 }

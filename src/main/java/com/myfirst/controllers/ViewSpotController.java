@@ -1,10 +1,8 @@
 package com.myfirst.controllers;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.myfirst.entitis.GuideInfo;
-import com.myfirst.entitis.HosHolder;
-import com.myfirst.entitis.ListViewObject;
-import com.myfirst.entitis.ViewSpot;
+import com.myfirst.entitis.*;
 import com.myfirst.service.ViewSpotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,6 +78,25 @@ public class ViewSpotController {
         resultObject.put("success", true);
 
         result = callback + " (' " + resultObject.toJSONString() + " ') ";
+        return result;
+    }
+
+    //后台管理添加景点信息
+    @RequestMapping(value = "/viewSpot/add")
+    public String addViewSpot(@Valid ViewSpot viewSpot, @RequestParam("callback") String callback) {
+        String result = "";
+        JSONObject resultJson = new JSONObject();
+        if (null == hosHolder.getUser()) {
+            resultJson.put("success", false);
+            resultJson.put("tip", "请先登录，再添加景点！");
+            result = callback + " (' " + resultJson.toJSONString() + " ') ";
+            return result;
+        }
+        resultJson.put("success", true);
+        resultJson.put("tip", "添加景点信息成功!");
+        resultJson.put("model", "");
+        viewSpotService.addViewSpot(viewSpot);
+        result = callback + " (' " + resultJson.toJSONString() + " ') ";
         return result;
     }
 }

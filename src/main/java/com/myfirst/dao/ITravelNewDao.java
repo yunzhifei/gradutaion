@@ -1,10 +1,7 @@
 package com.myfirst.dao;
 
 import com.myfirst.entitis.TravelNews;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -26,4 +23,10 @@ public interface ITravelNewDao {
 
     @Select({"select count(1) from " + TABLE_NAME})
     int findNewsCount();
+
+    @Update({"update " + TABLE_NAME + " set isDelete=1 " + " where id=#{id}"})
+    int updateTravelNewsIsDelete(@Param("id") int id);
+
+    @Select({"select " + INSERT_FILED + " from " + TABLE_NAME + " where id=#{travelNewsId} and isDelete=0"})
+    TravelNews findTravelNewsById(@Param("travelNewsId") int travelNewsId);
 }
