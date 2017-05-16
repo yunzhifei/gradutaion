@@ -29,7 +29,6 @@ public class ViewSpotService {
     }
 
 
-
     //浏览单个景点信息
     public ViewSpot findViewSpotById(int id) {
         return iviewSpotDao.findViewSpotById(id);
@@ -51,6 +50,6 @@ public class ViewSpotService {
             responseMap.put("error", "该景点已经被删除过，请不要重复删除！");
             return -1;
         }
-        return iviewSpotDao.deleteViewSporById(viewSpotId);
+        return iviewSpotDao.deleteViewSpotById(viewSpotId);
     }
 }

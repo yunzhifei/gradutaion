@@ -24,4 +24,7 @@ public interface IHotelOderDao {
 
     @Update({"update " + TABLE_NAME + " set payState=1 " + "where id=#{id}"})
     int updateHotelOrderPayStateById(@Param("id") int id);
+
+    @Select({"select count(1) " + " from " + TABLE_NAME + " where isDelete=0"})
+    int findHotelOrderUnDelete();
 }

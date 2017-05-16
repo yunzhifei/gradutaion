@@ -34,5 +34,5 @@ public interface IviewSpotDao {
     int findViewSpotCount();
 
     @Update({"update " + TABLE_NAME + " set isDelete=1 " + "where id=#{id}"})
-    int deleteViewSporById(@Param("id") int id);
+    int deleteViewSpotById(@Param("id") int id);
 }

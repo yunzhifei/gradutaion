@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by yunzh on 2017/5/3.
+ * yun zhi fei
  */
 @Mapper
 public interface IGuideInfoDao {
@@ -19,10 +20,10 @@ public interface IGuideInfoDao {
             + "#{description}, " + "#{img}, " + "0 )"})
     int addGuideInfo(GuideInfo guideInfo);
 
-    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + " limit #{offset},#{rows}"})
+    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + " where isDelete=0 " + " limit #{offset},#{rows}"})
     List<GuideInfo> selectAllGuideInfo(@Param("offset") int offset, @Param("rows") int rows);
 
-    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + "where travelid=#{travelid}"})
+    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + "where travelid=#{travelid} and isDelete=0"})
     GuideInfo selectGuideInfoById(@Param("travelid") int travelid);
 
     @Update({"update " + TABLE_NAME + " set isDelete=1" + "where travelid=#{travelid}"})

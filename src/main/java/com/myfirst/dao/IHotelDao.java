@@ -20,11 +20,11 @@ public interface IHotelDao {
     List<Hotel> findOnePageHotel(@Param("offset") int offset, @Param("rows") int rows);
 
     @Insert({"insert into " + TABLE_NAME + " ( " + INSERT_FILED + " ) values ( " +
-             "#{name}, " + "#{address}, " + "#{price}, " +
-             "#{pictureUrl}, " + "#{description}, " + "#{isDelete} )"})
+            "#{name}, " + "#{address}, " + "#{price}, " +
+            "#{pictureUrl}, " + "#{description}, " + "#{isDelete} )"})
     int addHotel(Hotel hotel);
 
-    @Select({"select * from " + TABLE_NAME + " where id=#{id}"})
+    @Select({"select * from " + TABLE_NAME + " where id=#{id} and isDelete=0"})
     Hotel findHotelById(@Param("id") int id);
 
     @Update({"update " + TABLE_NAME + "isDelete=1 where hotelId=#{hotelId}"})

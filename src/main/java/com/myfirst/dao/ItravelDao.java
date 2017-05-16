@@ -1,10 +1,7 @@
 package com.myfirst.dao;
 
 import com.myfirst.entitis.Travel;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -26,9 +23,13 @@ public interface ItravelDao {
     @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + " limit #{offset},#{rows}"})
     List<Travel> findOnePageTravel(@Param("offset") int offset, @Param("rows") int rows);
 
-    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + "where id=#{id}"})
+    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + "where id=#{id} and isDelete=0"})
     Travel findTravelById(@Param("id") int id);
 
     @Select({"select count(1) from " + TABLE_NAME})
-    public int findCount();
+    int findCount();
+
+    @Update({" update " + TABLE_NAME + " set isDelete=1 " + " where id=#{travelId}"})
+    int updateTravelIsDeleteById(@Param("travelId") int id);
+
 }
