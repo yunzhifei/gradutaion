@@ -1,6 +1,7 @@
 package com.myfirst.controllers;
 
 import com.alibaba.fastjson.JSONObject;
+import com.myfirst.entitis.HosHolder;
 import com.myfirst.entitis.ListViewObject;
 import com.myfirst.entitis.Travel;
 import com.myfirst.service.TravelService;
@@ -24,6 +25,8 @@ import java.util.Map;
 public class TravelController {
     @Autowired
     TravelService travelService;
+    @Autowired
+    HosHolder hosHolder;
 
     @RequestMapping(value = "/travel/list")
     public String findAllTravel(@RequestParam("callback") String callback, @RequestParam("page") int page, @RequestParam("size") int size) {
@@ -60,14 +63,30 @@ public class TravelController {
         return resultString;
     }
 
-    @RequestMapping(value = "/travel/{travelId}")
-    public String findTravelById(@PathVariable("travelId") int travelId, @RequestParam("callback") String callback) {
-        Travel travel = travelService.findTravelById(travelId);
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("model", travel);
-        jsonObject.put("success", true);
-        jsonObject.put("apiName", "theTravel");
-        String result = callback + " ('" + jsonObject.toJSONString() + " ')";
+
+    //订单删除
+    @RequestMapping(value = "/travel/delete")
+    public String addViewSpot(@RequestParam("id") int travelOrderId, @RequestParam("callback") String callback) {
+        String result = "";
+        JSONObject resultJson = new JSONObject();
+        Map<String, Object> responseMap = new HashMap<String, Object>();
+        if (null == hosHolder.getUser()) {
+            resultJson.put("success", false);
+            resultJson.put("tip", "请先登录，再管理资讯信息！");
+            result = callback + " (' " + resultJson.toJSONString() + " ') ";
+            return result;
+        }
+        travelService.deleteTravelById(travelOrderId, responseMap);
+        if (responseMap.containsKey("error")) {
+            resultJson.put("success", false);
+            resultJson.put("tip", responseMap.get("error"));
+            result = callback + " (' " + resultJson.toJSONString() + " ') ";
+            return result;
+        }
+        resultJson.put("success", true);
+        resultJson.put("tip", "交通信息删除成功!");
+        resultJson.put("model", responseMap);
+        result = callback + " (' " + resultJson.toJSONString() + " ') ";
         return result;
     }
 

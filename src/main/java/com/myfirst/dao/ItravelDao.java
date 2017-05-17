@@ -20,7 +20,7 @@ public interface ItravelDao {
     int addTravel(Travel travel);
 
 
-    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + " limit #{offset},#{rows}"})
+    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + " where isDelete=0 " + " limit #{offset},#{rows}"})
     List<Travel> findOnePageTravel(@Param("offset") int offset, @Param("rows") int rows);
 
     @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + "where id=#{id} and isDelete=0"})

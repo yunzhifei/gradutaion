@@ -23,10 +23,10 @@ public interface IGuideInfoDao {
     @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + " where isDelete=0 " + " limit #{offset},#{rows}"})
     List<GuideInfo> selectAllGuideInfo(@Param("offset") int offset, @Param("rows") int rows);
 
-    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + "where travelid=#{travelid} and isDelete=0"})
+    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + " where id=#{travelid} and isDelete=0"})
     GuideInfo selectGuideInfoById(@Param("travelid") int travelid);
 
-    @Update({"update " + TABLE_NAME + " set isDelete=1" + "where travelid=#{travelid}"})
+    @Update({"update " + TABLE_NAME + " set isDelete=1 " + " where id=#{travelid}"})
     int deleteGuideInfoById(@Param("travelid") int travelid);
 
     @Select({"select count(1) from " + TABLE_NAME})

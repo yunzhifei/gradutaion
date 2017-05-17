@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2017/5/4.
@@ -33,5 +34,15 @@ public class TravelService {
 
     public int findTravelCount() {
         return travelDao.findCount();
+    }
+
+    //删除出行方式信息
+    public int deleteTravelById(int travelId, Map<String, Object> responseMap) {
+        if (null == findTravelById(travelId)) {
+            responseMap.put("error", "出行方式已经删除，或者不存在，请不要重复删除！");
+            return -1;
+        }
+        travelDao.updateTravelIsDeleteById(travelId);
+        return 0;
     }
 }
