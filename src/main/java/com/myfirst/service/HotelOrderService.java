@@ -1,6 +1,7 @@
 package com.myfirst.service;
 
 import com.myfirst.dao.IHotelOderDao;
+import com.myfirst.entitis.HosHolder;
 import com.myfirst.entitis.HotelOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,14 @@ public class HotelOrderService {
     //支付旅馆费用
     public int payHotelOrder(int id) {
         return hotelOderDao.updateHotelOrderPayStateById(id);
+    }
+
+    //找到一个用户所有未支付的旅馆订单
+    public List<HotelOrder> findAllUnPayHotelOrderByUserId(int userId) {
+        return hotelOderDao.selectUserUnPayHotelOrderByUserId(userId);
+    }
+
+    public List<HotelOrder> findAllPayedHotelOrderByUserId(int userId) {
+        return hotelOderDao.selectUserPayedHotelOrderByUserId(userId);
     }
 }

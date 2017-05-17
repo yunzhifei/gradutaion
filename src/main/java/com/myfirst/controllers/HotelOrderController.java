@@ -54,7 +54,7 @@ public class HotelOrderController {
     }
 
 
-    //展示一个人所有的预定旅馆订单
+    //展示一个人所有的未支付的旅馆订单
     @RequestMapping(value = "/hotelOrderList")
     public String showHotelOrderList(HttpRequest httpRequest, @RequestParam("callBack") String callBack) {
         int userId = 0;

@@ -108,12 +108,21 @@ public class UserController {
 
     @RequestMapping(value = "/changePassWord")
     @ResponseBody
-    public String changPassWord(@RequestParam("oldPassWord") String oldPassWord, @RequestParam("newPassWord") String newPassWord, @RequestParam("callback") String callback) {
+    public String changPassWord(@RequestParam("oldPassWord") String oldPassWord, @RequestParam("newPassWord") String newPassWord, @RequestParam("callback") String callback, @RequestParam("newPassWord1") String newPassWord1) {
+
         Map<String, Object> responseMap = new HashMap<String, Object>();
         JSONObject resultObject = new JSONObject();
-
+        if (!newPassWord.equals(newPassWord1)) {
+            resultObject.put("tip", "两次输入的新密码不一致！");
+            resultObject.put("success", false);
+            String result = callback + " (' " + resultObject.toJSONString() + " ') ";
+            return result;
+        }
         if (null == hosHolder.getUser()) {
+            resultObject.put("success", false);
             responseMap.put("error", "用户未登录！");
+            String result = callback + " (' " + resultObject.toJSONString() + " ') ";
+            return result;
         }
         userService.updatePassword(hosHolder.getUser().getId(), oldPassWord, newPassWord, responseMap);
         if (responseMap.containsKey("error")) {
