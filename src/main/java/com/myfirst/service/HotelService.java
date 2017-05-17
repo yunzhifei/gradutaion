@@ -45,8 +45,8 @@ public class HotelService {
     public List<Hotel> findOnePageHotel(int size, int page) {
         return hotelDao.findOnePageHotel(page * size, size);
     }
-    //获取旅馆总数
 
+    //获取旅馆总数
     public int findHotelCount() {
         return hotelDao.findHotelCount();
     }

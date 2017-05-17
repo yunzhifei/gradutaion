@@ -51,4 +51,25 @@ public class TravelOrderService {
         travelOrderDao.updateTravelOrderIsDelete(travelOrderId);
         return 0;
     }
+
+    //查询该个用户的所有未支付的出行订单
+    public List<TravelOrder> findAllUserUnPayTravelOrderByUserId(int userId) {
+        return travelOrderDao.selectUserUnPayTravelOrderByUserId(userId);
+    }
+
+    //查询所有已经支付过的出行订单
+    public List<TravelOrder> findAllUserPayedTravelOrderByUserId(int userId) {
+        return travelOrderDao.selectUserPayedTravelOrderByUserId(userId);
+    }
+
+    //未支付的出行订单总数
+    public int findCountUserUnpayTravelOrderByUserId(int userId) {
+        return travelOrderDao.selectCountUserUnpayTravelOrderByUserId(userId);
+    }
+
+    //已经支付的出行订单总数
+    public int findCountUserPayedTravelOrderByUserId(int userId) {
+        return travelOrderDao.selectCountUserPayedTravelOrderByUserId(userId);
+    }
+
 }

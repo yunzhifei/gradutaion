@@ -31,4 +31,16 @@ public interface IHotelOderDao {
 
     @Select({"select " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=1 " + " and userId=#{userId}"})
     List<HotelOrder> selectUserPayedHotelOrderByUserId(@Param("userId") int userId);
+
+    @Select({"select count(1) " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=0 and " + "userId=#{userId}"})
+    int selectCountUserUnpayHotelOrderByUserId(@Param("userId") int userId);
+
+    @Select({"select count(1) " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=1 and " + "userId=#{userId}"})
+    int selectCountUserPayedHotelOrderByUserId(@Param("userId") int userId);
+
+    @Select({"select " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=1 and id=#{id}"})
+    HotelOrder findHotelOrderById(@Param("id") int id);
+
+    @Update({" update " + TABLE_NAME + " set  isDelete=1 " + " where id=#{id}"})
+    int updateHotelOrderIsDeleteById(@Param("id") int id);
 }

@@ -1,5 +1,6 @@
 package com.myfirst.dao;
 
+import com.myfirst.entitis.HotelOrder;
 import com.myfirst.entitis.TravelOrder;
 import org.apache.ibatis.annotations.*;
 
@@ -31,4 +32,16 @@ public interface ITravelOrderDao {
 
     @Select({"select " + INSERT_FIELD + " from " + TABLE_NAME + " where id=#{id}"})
     TravelOrder findTravelOrderById(@Param("id") int id);
+
+    @Select({"select " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=0 " + " and userId=#{userId}"})
+    List<TravelOrder> selectUserUnPayTravelOrderByUserId(@Param("userId") int userId);
+
+    @Select({"select " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=1 " + " and userId=#{userId}"})
+    List<TravelOrder> selectUserPayedTravelOrderByUserId(@Param("userId") int userId);
+
+    @Select({"select count(1) " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=0 and " + "userId=#{userId}"})
+    int selectCountUserUnpayTravelOrderByUserId(@Param("userId") int userId);
+
+    @Select({"select count(1) " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=1 and " + "userId=#{userId}"})
+    int selectCountUserPayedTravelOrderByUserId(@Param("userId") int userId);
 }
