@@ -19,7 +19,6 @@ public class ViewSpot {
     }
 
     public String getPictureUrl() {
-
         return pictureUrl;
     }
 

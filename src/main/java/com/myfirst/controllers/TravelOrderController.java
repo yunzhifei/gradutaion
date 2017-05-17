@@ -61,7 +61,7 @@ public class TravelOrderController {
 
     //订单删除
     @RequestMapping(value = "/travelOrder/delete")
-    public String addViewSpot(@RequestParam("id") int travelOrderId, @RequestParam("callback") String callback) {
+    public String deleteTravelOrder(@RequestParam("id") int travelOrderId, @RequestParam("callback") String callback) {
         String result = "";
         JSONObject resultJson = new JSONObject();
         Map<String, Object> responseMap = new HashMap<String, Object>();

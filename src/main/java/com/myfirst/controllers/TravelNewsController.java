@@ -69,7 +69,7 @@ public class TravelNewsController {
     }
 
     //订单删除
-    @RequestMapping(value = "/travelOrder/delete")
+    @RequestMapping(value = "/travelNews/delete")
     public String addViewSpot(@RequestParam("id") int travelOrderId, @RequestParam("callback") String callback) {
         String result = "";
         JSONObject resultJson = new JSONObject();
