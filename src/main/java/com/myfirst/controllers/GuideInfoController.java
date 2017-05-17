@@ -52,19 +52,19 @@ public class GuideInfoController {
     }
 
     @RequestMapping(value = "/guideInfo/add")
-    public String addGuideInfo(@Valid GuideInfo guideInfo, @RequestParam("callback") String callback) {
+    public String addGuideInfo(@Valid GuideInfo guideInfo) {
         String result = "";
         JSONObject resultJson = new JSONObject();
         if (null == hosHolder.getUser()) {
             resultJson.put("success", false);
             resultJson.put("tip", "请先登录，然后操作导游信息！");
-            result = callback + " (' " + resultJson.toJSONString() + " ') ";
+            result = resultJson.toJSONString() ;
             return result;
         }
         resultJson.put("tip", "添加成功!");
         resultJson.put("success", true);
         guideService.addGuideInfo(guideInfo);
-        result = callback + " (' " + resultJson.toJSONString() + " ') ";
+        result = resultJson.toJSONString() ;
         return result;
     }
 

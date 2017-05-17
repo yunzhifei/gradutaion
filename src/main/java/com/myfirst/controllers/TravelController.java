@@ -52,14 +52,14 @@ public class TravelController {
     }
 
     @RequestMapping(value = "/travel/add")
-    public String addTravel(@Valid Travel travel, @RequestParam("callback") String callback) {
+    public String addTravel(@Valid Travel travel) {
         int result = travelService.addTravel(travel);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("model", result);
         jsonObject.put("success", true);
         jsonObject.put("apiName", "travelAdd");
         jsonObject.put("tip", "添加成功！");
-        String resultString = callback + " ('" + jsonObject.toJSONString() + "')";
+        String resultString =  jsonObject.toJSONString() ;
         return resultString;
     }
 

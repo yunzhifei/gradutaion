@@ -85,20 +85,20 @@ public class ViewSpotController {
 
     //后台管理添加景点信息
     @RequestMapping(value = "/viewSpot/add")
-    public String addViewSpot(@Valid ViewSpot viewSpot, @RequestParam("callback") String callback) {
+    public String addViewSpot(@Valid ViewSpot viewSpot) {
         String result = "";
         JSONObject resultJson = new JSONObject();
         if (null == hosHolder.getUser()) {
             resultJson.put("success", false);
             resultJson.put("tip", "请先登录，再添加景点！");
-            result = callback + " (' " + resultJson.toJSONString() + " ') ";
+            result = resultJson.toJSONString();
             return result;
         }
         resultJson.put("success", true);
         resultJson.put("tip", "添加景点信息成功!");
         resultJson.put("model", "");
         viewSpotService.addViewSpot(viewSpot);
-        result = callback + " (' " + resultJson.toJSONString() + " ') ";
+        result = resultJson.toJSONString();
         return result;
     }
 }

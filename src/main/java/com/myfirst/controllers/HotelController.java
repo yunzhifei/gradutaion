@@ -54,19 +54,19 @@ public class HotelController {
 
 
     @RequestMapping("/hotel/add")
-    public String addHotel(@Valid Hotel hotel, @RequestParam("callback") String callback) {
+    public String addHotel(@Valid Hotel hotel) {
         String result = "";
         JSONObject resultJson = new JSONObject();
         if (null == hosHolder.getUser()) {
             resultJson.put("success", false);
             resultJson.put("tip", "请先登录，然后操作导游信息！");
-            result = callback + " (' " + resultJson.toJSONString() + " ') ";
+            result =  resultJson.toJSONString() ;
             return result;
         }
         hotelService.addHotel(hotel);
         resultJson.put("tip", "添加成功!");
         resultJson.put("success", true);
-        result = callback + " (' " + resultJson.toJSONString() + " ') ";
+        result = resultJson.toJSONString();
         return result;
     }
 

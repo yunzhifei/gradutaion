@@ -24,7 +24,7 @@ public interface IviewSpotDao {
     int addViewSpot(ViewSpot viewSpot);
 
 
-    @Select({"select * from" + TABLE_NAME + " where id=#{ids}"})
+    @Select({"select * from" + TABLE_NAME + " where id=#{id}"})
     ViewSpot findViewSpotById(@Param("id") int id);
 
     @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + " where isDelete=0 limit #{offset},#{rows}"})

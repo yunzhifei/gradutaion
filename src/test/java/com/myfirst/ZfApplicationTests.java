@@ -169,21 +169,61 @@ public class ZfApplicationTests {
     ITravelNewDao travelNewDao;
 
     @Test
-    public void Test() {
-        TravelNews travelNews = new TravelNews();
-        Calendar calendar = Calendar.getInstance();
-        Random random = new Random();
+    public void Test() throws IOException {
+//        TravelNews travelNews = new TravelNews();
+//        Calendar calendar = Calendar.getInstance();
+//        Random random = new Random();
+//        for (int i = 0; i < 100; i++) {
+//            calendar.add(Calendar.DAY_OF_YEAR, random.nextInt(100) - 100);
+//            calendar.set(Calendar.MINUTE, random.nextInt(60));
+//            calendar.set(Calendar.HOUR, random.nextInt(24));
+//            calendar.set(Calendar.SECOND, random.nextInt(60));
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
+//            travelNews.setTitle("asdfasdf");
+//            travelNews.setContent("asfdasfd");
+//            travelNews.setCreateDate(simpleDateFormat.format(calendar.getTime()));
+//            travelNews.setPicture("http://opkb3ene9.bkt.clouddn.com/tavelNews" + (i % 10 + 1) + ".jpg");
+//            travelNewDao.addTravelNew(travelNews);
+
+        ViewSpot viewSpot = new ViewSpot();
+        File file = new File("city.txt");
+        FileInputStream fileInputStream = new FileInputStream(file);
+        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, "UTF-8");
+        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        String line = null;
+        List<String> cityList = new LinkedList<String>();
+        while ((line = bufferedReader.readLine()) != null) {
+            String[] citys = line.split("\t");
+            for (String city : citys) {
+                cityList.add(city);
+            }
+        }
+
+        File file1 = new File("viewSpotName.txt");
+        FileInputStream fileInputStream1 = new FileInputStream(file1);
+        InputStreamReader inputStreamReader1 = new InputStreamReader(fileInputStream1, "UTF-8");
+        BufferedReader bufferedReader1 = new BufferedReader(inputStreamReader1);
+        String line1 = null;
+        List<String> cityList1 = new LinkedList<String>();
+        while ((line1 = bufferedReader1.readLine()) != null) {
+            String[] citys = line1.split("、");
+            for (String city : citys) {
+                cityList1.add(city);
+            }
+        }
+
+
         for (int i = 0; i < 100; i++) {
-            calendar.add(Calendar.DAY_OF_YEAR, random.nextInt(100) - 100);
-            calendar.set(Calendar.MINUTE, random.nextInt(60));
-            calendar.set(Calendar.HOUR, random.nextInt(24));
-            calendar.set(Calendar.SECOND, random.nextInt(60));
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS");
-            travelNews.setTitle("asdfasdf");
-            travelNews.setContent("asfdasfd");
-            travelNews.setCreateDate(simpleDateFormat.format(calendar.getTime()));
-            travelNews.setPicture("http://opkb3ene9.bkt.clouddn.com/tavelNews" + (i % 10 + 1) + ".jpg");
-            travelNewDao.addTravelNew(travelNews);
+            int cityIndex = new Random().nextInt(cityList.size());
+            int nameIndex = new Random().nextInt(cityList1.size());
+            viewSpot.setAddress(cityList.get(cityIndex));
+            viewSpot.setPhone("188290406" + new Random().nextInt(90) + 10);
+            viewSpot.setPictureUrl("http://opkb3ene9.bkt.clouddn.com/viewSpot" + (i % 10 + 1) + ".jpg");
+            viewSpot.setViewName(cityList1.get(nameIndex));
+            viewSpot.setDescription("国家五A级景点！欢迎你到来！");
+            viewSpot.setWebsite("www." + "viewSpot1" + nameIndex + ".com");
+            iviewSpotDao.addViewSpot(viewSpot);
         }
     }
+
 }

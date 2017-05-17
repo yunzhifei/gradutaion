@@ -51,20 +51,20 @@ public class TravelNewsController {
     }
 
     @RequestMapping("/travelNews/add")
-    public String bookTravelOrder(@Valid TravelNews travelNews, @RequestParam("callback") String callback) {
+    public String bookTravelOrder(@Valid TravelNews travelNews) {
         String result = "";
         TravelOrder travelOrder = new TravelOrder();
         JSONObject resultJson = new JSONObject();
         if (null == hosHolder.getUser()) {
             resultJson.put("success", false);
             resultJson.put("tip", "请先登录，然后添加旅游资讯！");
-            result = callback + " (' " + resultJson.toJSONString() + " ') ";
+            result = resultJson.toJSONString() ;
             return result;
         }
         travelNewsService.addTravelNews(travelNews);
         resultJson.put("success", true);
         resultJson.put("tip", "旅游资讯添加成功！");
-        result = callback + " (' " + resultJson.toJSONString() + " ') ";
+        result = resultJson.toJSONString() ;
         return result;
     }
 
