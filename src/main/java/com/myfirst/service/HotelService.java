@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yun zhi fei on 2017/5/3.
@@ -31,7 +32,11 @@ public class HotelService {
     }
 
     //删除旅馆信息
-    public int deleteHotel(int hotelId) {
+    public int deleteHotel(int hotelId, Map<String, Object> responseMap) {
+        if (null == findHotelById(hotelId)) {
+            responseMap.put("error", "旅馆信息不存在，或者已经删除请不要重复删除！");
+            return -1;
+        }
         return hotelDao.updateHotel(hotelId);
     }
 

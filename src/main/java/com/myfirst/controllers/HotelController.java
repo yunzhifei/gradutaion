@@ -1,12 +1,10 @@
 package com.myfirst.controllers;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.myfirst.entitis.GuideInfo;
+import com.myfirst.entitis.HosHolder;
 import com.myfirst.entitis.Hotel;
 import com.myfirst.entitis.ListViewObject;
 import com.myfirst.service.HotelService;
-import org.omg.PortableInterceptor.HOLDING;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +25,8 @@ import java.util.Map;
 public class HotelController {
     @Autowired
     HotelService hotelService;
+    @Autowired
+    HosHolder hosHolder;
 
     @RequestMapping("/hotel/list")
     public String hotelList(@RequestParam("callback") String callback, @RequestParam("page") int page, @RequestParam("size") int size) {
@@ -53,22 +53,45 @@ public class HotelController {
     }
 
 
-    @RequestMapping("/hotel/{hotelId}")
-    public String hotelDetail(@PathVariable("hotelId") int hotelId) {
-        Hotel hotel = hotelService.findHotelById(hotelId);
-        return JSON.toJSONString(hotel);
-    }
-
     @RequestMapping("/hotel/add")
-    public String addHotel(@Valid Hotel hotel) {
-        int hotelId = (int) System.currentTimeMillis() / 10;
+    public String addHotel(@Valid Hotel hotel, @RequestParam("callback") String callback) {
+        String result = "";
+        JSONObject resultJson = new JSONObject();
+        if (null == hosHolder.getUser()) {
+            resultJson.put("success", false);
+            resultJson.put("tip", "请先登录，然后操作导游信息！");
+            result = callback + " (' " + resultJson.toJSONString() + " ') ";
+            return result;
+        }
         hotelService.addHotel(hotel);
-        return "success";
+        resultJson.put("tip", "添加成功!");
+        resultJson.put("success", true);
+        result = callback + " (' " + resultJson.toJSONString() + " ') ";
+        return result;
     }
 
-    @RequestMapping("/hotel/delete/{hotelId}")
-    public String deleteHotel(@PathVariable("hotelId") int hotelId) {
-        hotelService.deleteHotel(hotelId);
-        return "success";
+    @RequestMapping("/hotel/delete")
+    public String deleteHotel(@RequestParam("id") int hotelId, @RequestParam("callback") String callback) {
+        String result = "";
+        Map<String, Object> responseMap = new HashMap<String, Object>();
+        JSONObject resultJson = new JSONObject();
+        if (null == hosHolder.getUser()) {
+            resultJson.put("success", false);
+            resultJson.put("tip", "请先登录，然后操作导游信息！");
+            result = callback + " (' " + resultJson.toJSONString() + " ') ";
+            return result;
+        }
+        hotelService.deleteHotel(hotelId,responseMap);
+        if (responseMap.containsKey("error")) {
+            resultJson.put("success", false);
+            resultJson.put("tip", responseMap.get("error"));
+            result = callback + " (' " + resultJson.toJSONString() + " ') ";
+            return result;
+        }
+        resultJson.put("tip", "删除成功!");
+        resultJson.put("success", true);
+        result = callback + " (' " + resultJson.toJSONString() + " ') ";
+        return result;
     }
+
 }

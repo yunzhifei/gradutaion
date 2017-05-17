@@ -31,4 +31,6 @@ public interface IGuideInfoDao {
 
     @Select({"select count(1) from " + TABLE_NAME})
     int findGuideInfoCount();
+
+
 }
