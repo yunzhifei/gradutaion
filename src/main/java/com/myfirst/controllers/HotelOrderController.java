@@ -64,7 +64,7 @@ public class HotelOrderController {
             result = callback + " (' " + resultJson.toJSONString() + " ') ";
             return result;
         }
-        List<HotelOrder> hotelOrders = hotelOrderService.findAllUnPayHotelOrderByUserId(hosHolder.getUser().getId(), size, page);
+        List<HotelOrder> hotelOrders = hotelOrderService.findAllUnPayHotelOrderByUserId(hosHolder.getUser().getId(), size, page-1);
         List<ListViewObject> list = new ArrayList<>();
         for (HotelOrder hotelOrder : hotelOrders) {
             ListViewObject viewObject = new ListViewObject<HotelOrder>();

@@ -13,8 +13,8 @@ import java.util.List;
 @Mapper
 public interface ITravelOrderDao {
     String TABLE_NAME = " travelOrder ";
-    String SELECT_FIELD = " bookDate,personNumber,payState,orderState,isDelete,userId,travelId ";
-    String INSERT_FIELD = "id, " + SELECT_FIELD;
+    String INSERT_FIELD = " bookDate,personNumber,payState,orderState,isDelete,userId,travelId ";
+    String SELECT_FIELD = "id, " + INSERT_FIELD;
 
     @Insert({"insert into " + TABLE_NAME + " ( " + INSERT_FIELD + " ) values (" +
             "#{bookDate}, " + "#{personNumber}, " + "#{payState}, " + "#{orderState}, "
@@ -30,18 +30,18 @@ public interface ITravelOrderDao {
     @Update({"update " + TABLE_NAME + "set isDelete=1 " + "where id=#{travelOrderId}"})
     int updateTravelOrderIsDelete(@Param("travelOrderId") int travelOrderId);
 
-    @Select({"select " + INSERT_FIELD + " from " + TABLE_NAME + " where id=#{id}"})
+    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + " where id=#{id}"})
     TravelOrder findTravelOrderById(@Param("id") int id);
 
-    @Select({"select " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=0 " + " and userId=#{userId} " + " limit #{offset},#{rows} "})
+    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + " where payState=0 " + " and userId=#{userId} " + " limit #{offset},#{rows} "})
     List<TravelOrder> selectUserUnPayTravelOrderByUserId(@Param("userId") int userId, @Param("offset") int offset, @Param("rows") int rows);
 
-    @Select({"select " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=1 " + " and userId=#{userId} and isDelete=0" + " limit #{offset},#{rows} "})
+    @Select({"select " + SELECT_FIELD + " from " + TABLE_NAME + " where payState=1 " + " and userId=#{userId} and isDelete=0" + " limit #{offset},#{rows} "})
     List<TravelOrder> selectUserPayedTravelOrderByUserId(@Param("userId") int userId, @Param("offset") int offset, @Param("rows") int rows);
 
-    @Select({"select count(1) " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=0 and " + "userId=#{userId}"})
+    @Select({"select count(1) "  + " from " + TABLE_NAME + " where payState=0 and " + "userId=#{userId}"})
     int selectCountUserUnpayTravelOrderByUserId(@Param("userId") int userId);
 
-    @Select({"select count(1) " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=1 and " + "userId=#{userId}"})
+    @Select({"select count(1) " + SELECT_FIELD + " from " + TABLE_NAME + " where payState=1 and " + "userId=#{userId} and isDelete=0"})
     int selectCountUserPayedTravelOrderByUserId(@Param("userId") int userId);
 }
