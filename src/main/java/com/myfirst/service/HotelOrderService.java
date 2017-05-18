@@ -29,13 +29,18 @@ public class HotelOrderService {
     }
 
     //支付旅馆费用
-    public int payHotelOrder(int id) {
+    public int payHotelOrder(int id, Map<String, Object> responseMap) {
+        HotelOrder hotelOrder = findHotelOrderById(id);
+        if (1 == hotelOrder.getPayState()) {
+            responseMap.put("error", "订单已经支付过请不要重新支付！");
+            return -1;
+        }
         return hotelOderDao.updateHotelOrderPayStateById(id);
     }
 
     //找到一个用户所有未支付的旅馆订单
-    public List<HotelOrder> findAllUnPayHotelOrderByUserId(int userId) {
-        return hotelOderDao.selectUserUnPayHotelOrderByUserId(userId);
+    public List<HotelOrder> findAllUnPayHotelOrderByUserId(int userId, int size, int page) {
+        return hotelOderDao.selectUserUnPayHotelOrderByUserId(userId, page * size, size);
     }
 
     //未支付总数
@@ -44,8 +49,8 @@ public class HotelOrderService {
     }
 
     //找到一个用户所有已支付的旅馆订单
-    public List<HotelOrder> findAllPayedHotelOrderByUserId(int userId) {
-        return hotelOderDao.selectUserPayedHotelOrderByUserId(userId);
+    public List<HotelOrder> findAllPayedHotelOrderByUserId(int userId, int size, int page) {
+        return hotelOderDao.selectUserPayedHotelOrderByUserId(userId, page * size, size);
     }
 
     //已支付总数
@@ -53,7 +58,7 @@ public class HotelOrderService {
         return hotelOderDao.selectCountUserPayedHotelOrderByUserId(userId);
     }
 
-    //通过订单id找到旅馆的订单
+    //删除订单
     public HotelOrder findHotelOrderById(int id) {
         return hotelOderDao.findHotelOrderById(id);
     }

@@ -26,11 +26,11 @@ public interface IHotelOderDao {
     int updateHotelOrderPayStateById(@Param("id") int id);
 
 
-    @Select({"select " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=0 " + " and userId=#{userId}"})
-    List<HotelOrder> selectUserUnPayHotelOrderByUserId(@Param("userId") int userId);
+    @Select({"select " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=0 " + " and userId=#{userId} " + " limit #{offset},#{rows}"})
+    List<HotelOrder> selectUserUnPayHotelOrderByUserId(@Param("userId") int userId, @Param("offset") int offset, @Param("rows") int rows);
 
-    @Select({"select " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=1 " + " and userId=#{userId}"})
-    List<HotelOrder> selectUserPayedHotelOrderByUserId(@Param("userId") int userId);
+    @Select({"select " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=1 " + " and userId=#{userId} limit #{offset},#{rows}"})
+    List<HotelOrder> selectUserPayedHotelOrderByUserId(@Param("userId") int userId, @Param("offset") int offset, @Param("rows") int rows);
 
     @Select({"select count(1) " + INSERT_FIELD + " from " + TABLE_NAME + " where payState=0 and " + "userId=#{userId}"})
     int selectCountUserUnpayHotelOrderByUserId(@Param("userId") int userId);

@@ -64,7 +64,7 @@ public class TravelOrderService {
 
     //查询所有已经支付过的出行订单
     public List<TravelOrder> findAllUserPayedTravelOrderByUserId(int userId, int size, int page) {
-        return travelOrderDao.selectUserPayedTravelOrderByUserId(userId, (page - 1) * size, size);
+        return travelOrderDao.selectUserPayedTravelOrderByUserId(userId, (page ) * size, size);
     }
 
     //未支付的出行订单总数

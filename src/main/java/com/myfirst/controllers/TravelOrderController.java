@@ -43,14 +43,14 @@ public class TravelOrderController {
             result = callback + " (' " + resultJson.toJSONString() + " ') ";
             return result;
         }
-        List<TravelOrder> travelOrders = travelOrderService.findAllUserUnPayTravelOrderByUserId(hosHolder.getUser().getId(), size, page - 1);
+        List<TravelOrder> travelOrders = travelOrderService.findAllUserUnPayTravelOrderByUserId(hosHolder.getUser().getId(), size, page);
         List<ListViewObject> list = new ArrayList<>();
         for (TravelOrder travelOrder : travelOrders) {
             ListViewObject viewObject = new ListViewObject<GuideInfo>();
             Travel travel = travelService.findTravelById(travelOrder.getTravelId());
             viewObject.setId(travelOrder.getId());
             viewObject.setTitle(travel.getTravelType());
-            viewObject.setContent("起点:  " + travel.getStartAddress() + " 终点：" + travel.getEndAddress() + " 人数： " + travelOrder.getPersonNumber() + " 单价：" + travel.getPrice() + " (元/人)");
+            viewObject.setContent("起点:  " + travel.getStartAddress() + " 终点：" + travel.getEndAddress() + " 人数： " + travelOrder.getPersonNumber() + " 单价：" + travel.getPrice() + " (元/人)" + "预定日期:" + travelOrder.getBookDate());
             viewObject.setEntity(travelOrder);
             list.add(viewObject);
         }

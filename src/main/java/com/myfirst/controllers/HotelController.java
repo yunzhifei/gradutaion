@@ -77,7 +77,7 @@ public class HotelController {
         JSONObject resultJson = new JSONObject();
         if (null == hosHolder.getUser()) {
             resultJson.put("success", false);
-            resultJson.put("tip", "请先登录，然后操作导游信息！");
+            resultJson.put("tip", "请先登录，然后操作订单！");
             result = callback + " (' " + resultJson.toJSONString() + " ') ";
             return result;
         }
@@ -93,5 +93,7 @@ public class HotelController {
         result = callback + " (' " + resultJson.toJSONString() + " ') ";
         return result;
     }
+
+
 
 }
