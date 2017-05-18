@@ -33,7 +33,12 @@ public class TravelOrderService {
     }
 
     //支付交通费用
-    public int payTravel(int id) {
+    public int payTravel(int id, Map<String, Object> responseMap) {
+        TravelOrder travelOrder = findTravelOrderById(id);
+        if (travelOrder.getPayState() == 1) {
+            responseMap.put("error", "订单已经支付过请不要重新支付");
+            return -1;
+        }
         return travelOrderDao.updateTravelOrderPayStateById(id);
     }
 
@@ -53,13 +58,13 @@ public class TravelOrderService {
     }
 
     //查询该个用户的所有未支付的出行订单
-    public List<TravelOrder> findAllUserUnPayTravelOrderByUserId(int userId) {
-        return travelOrderDao.selectUserUnPayTravelOrderByUserId(userId);
+    public List<TravelOrder> findAllUserUnPayTravelOrderByUserId(int userId, int size, int page) {
+        return travelOrderDao.selectUserUnPayTravelOrderByUserId(userId, (page - 1) * size, size);
     }
 
     //查询所有已经支付过的出行订单
-    public List<TravelOrder> findAllUserPayedTravelOrderByUserId(int userId) {
-        return travelOrderDao.selectUserPayedTravelOrderByUserId(userId);
+    public List<TravelOrder> findAllUserPayedTravelOrderByUserId(int userId, int size, int page) {
+        return travelOrderDao.selectUserPayedTravelOrderByUserId(userId, (page - 1) * size, size);
     }
 
     //未支付的出行订单总数
