@@ -8,7 +8,6 @@ import java.util.List;
 
 /**
  * Created by 58 on 2017/1/17.
- * author yun zhi fei
  */
 @Mapper
 public interface IUserDao {

@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * Created by 58 on 2017/1/17
- * author yun zhi fei
  */
 @Component
 public class User {

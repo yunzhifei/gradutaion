@@ -19,8 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by yunzh on 2017/5/16.
- * yun zhi fei
+ *
  */
 @RestController
 public class ViewSpotController {

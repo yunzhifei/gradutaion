@@ -6,8 +6,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/5/14.
- * yun zhi fei
+ * Created by Administrator on 2017/5/14
  */
 @Mapper
 public interface ITravelNewDao {

@@ -7,8 +7,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/5/4.
- * yun zhi fei
+ * Created by Administrator on 2017/5/
  */
 @Mapper
 public interface ITravelOrderDao {

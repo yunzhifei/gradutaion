@@ -7,6 +7,7 @@ import com.myfirst.entitis.HosHolder;
 import com.myfirst.entitis.ListViewObject;
 import com.myfirst.entitis.User;
 import com.myfirst.service.UserService;
+import com.myfirst.utl.GraduationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +21,6 @@ import java.util.*;
 
 /**
  * Created by 58 on 2017/2/8.
- * author yun zhi fei
  */
 @Controller
 public class UserController {
@@ -65,12 +65,15 @@ public class UserController {
 
     @RequestMapping(value = "/reg", method = {RequestMethod.POST})
     @ResponseBody
-    public String regUser(@Valid User user, BindingResult result, Model model, @RequestParam("callback") String callback) {
+    public String regUser(@Valid User user, BindingResult result, Model model) {
         String resultString = "";
         StringBuffer salt = new StringBuffer("");
+        //密码盐
         for (int i = 0; i < 10; i++) {
             salt.append(String.valueOf(48 + new Random().nextInt(10)));
         }
+        //md5加密
+        user.setPassword(GraduationUtil.MD5(user.getPassword() + salt));
         JSONObject resultObject = new JSONObject();
 
         resultObject.put("apiName", "account");
@@ -81,10 +84,11 @@ public class UserController {
         } catch (Exception e) {
             resultObject.put("success", false);
         }
+        resultObject.put("tip", "注册成功！");
         resultObject.put("success", true);
         System.out.println("useid = " + useId);
-        resultString = callback + " (' " + resultObject.toJSONString() + " ') ";
-        return resultString;
+
+        return resultObject.toJSONString();
     }
 
     @RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})

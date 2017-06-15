@@ -3,8 +3,7 @@ package com.myfirst.entitis;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by yun on 2017/5/3.
- * yun zhi fei
+ * Created by yun on 2017/5/3
  */
 @Component
 public class TravelOrder {

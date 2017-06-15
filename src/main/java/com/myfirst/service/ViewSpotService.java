@@ -11,7 +11,6 @@ import java.util.Map;
 
 /**
  * Created by yun on 2017/5/3.
- * yun zhi fei
  */
 @Service
 public class ViewSpotService {

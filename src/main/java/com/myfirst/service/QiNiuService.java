@@ -17,7 +17,6 @@ import java.util.UUID;
 
 /**
  * Created by Administrator on 2017/5/7.
- * yun zhi fei
  */
 @Service
 public class QiNiuService {

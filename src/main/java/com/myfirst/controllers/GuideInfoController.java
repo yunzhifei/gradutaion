@@ -5,6 +5,8 @@ import com.myfirst.entitis.GuideInfo;
 import com.myfirst.entitis.HosHolder;
 import com.myfirst.entitis.ListViewObject;
 import com.myfirst.service.GuideService;
+import com.myfirst.service.SensitiveService;
+import com.myfirst.utl.GraduationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,10 +20,11 @@ import java.util.Map;
 
 /**
  * Created by Administrator on 2017/5/14.
- * yun zhi fei
  */
 @RestController
 public class GuideInfoController {
+    @Autowired
+    SensitiveService sensitiveService;
     @Autowired
     GuideService guideService;
     @Autowired
@@ -58,13 +61,14 @@ public class GuideInfoController {
         if (null == hosHolder.getUser()) {
             resultJson.put("success", false);
             resultJson.put("tip", "请先登录，然后操作导游信息！");
-            result = resultJson.toJSONString() ;
+            result = resultJson.toJSONString();
             return result;
         }
+        sensitiveService.filter(guideInfo.getDescription());
         resultJson.put("tip", "添加成功!");
         resultJson.put("success", true);
         guideService.addGuideInfo(guideInfo);
-        result = resultJson.toJSONString() ;
+        result = resultJson.toJSONString();
         return result;
     }
 

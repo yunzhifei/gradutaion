@@ -19,7 +19,6 @@ import java.util.Map;
 
 /**
  * Created by yun zhi fei on 2017/5/3.
- * yun zhi fei
  */
 @RestController
 public class HotelController {

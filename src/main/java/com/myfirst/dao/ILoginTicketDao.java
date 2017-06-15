@@ -4,8 +4,7 @@ import com.myfirst.entitis.LoginTicket;
 import org.apache.ibatis.annotations.*;
 
 /**
- * Created by Administrator on 2017/5/4.
- * yun zhi fei
+ * Created by Administrator on 2017/5/4
  */
 @Mapper
 public interface ILoginTicketDao {

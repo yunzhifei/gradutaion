@@ -6,8 +6,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * Created by yunzh on 2017/5/3.
- * yun zhi fei
+ * Created by yunzh on 2017/5/3
  */
 @Mapper
 public interface IGuideInfoDao {

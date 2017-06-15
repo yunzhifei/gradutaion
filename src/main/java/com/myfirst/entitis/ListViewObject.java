@@ -2,7 +2,6 @@ package com.myfirst.entitis;
 
 /**
  * Created by Administrator on 2017/5/13.
- * yun zhi fei
  */
 public class ListViewObject<T> {
     int id;

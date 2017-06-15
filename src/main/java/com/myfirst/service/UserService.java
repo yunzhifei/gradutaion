@@ -5,6 +5,7 @@ import com.myfirst.dao.IUserDao;
 import com.myfirst.entitis.HosHolder;
 import com.myfirst.entitis.LoginTicket;
 import com.myfirst.entitis.User;
+import com.myfirst.utl.GraduationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,6 @@ import java.util.UUID;
 
 /**
  * Created by 58 on 2017/1/17.
- * author yun zhi fei
  */
 @Service
 public class UserService {
@@ -30,6 +30,7 @@ public class UserService {
     }
 
     public int addUser(User user) {
+        //用户的密码
         return iUserDao.addUser(user);
     }
 
@@ -44,7 +45,7 @@ public class UserService {
             responeMap.put("error", "用户不存在！");
             return responeMap;
         }
-        if (!user.getPassword().equals(password)) {
+        if (!user.getPassword().equals(GraduationUtil.MD5(password + user.getSalt()))) {
             responeMap.put("error", "用户名和密码不匹配！");
             return responeMap;
         } else {
